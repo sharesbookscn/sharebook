@@ -1,0 +1,1 @@
+document.getElementsByTagName("app")[0].innerHTML= require('./firstpage.html');

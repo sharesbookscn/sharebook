@@ -1,0 +1,62 @@
+<div style="display: flex; flex-direction: column;background-color: white;width:100%;height:100%;">
+    <div class="toolbar">
+        <select [(ngModel)]="display" style="float:left;">
+            <option value="pie">饼图</option>
+            <option value="grid">表格</option>
+        </select>
+        <select *ngIf="hastype==1" [(ngModel)]="type" (change)="changetype($event.target.value)" style="float:right;">
+            <option value="2">今天</option>
+            <option value="3">本月</option>
+            <option value="4">今年</option>
+            <option value="5">昨天</option>
+            <option value="6">上月</option>
+            <option value="7">去年</option>
+        </select>
+    </div>
+    <div *ngIf="!loaded" class="loading" ><span>正在加载...</span></div>
+    <div *ngIf="display=='pie'" class="pie">
+        <chart *ngIf="loaded" [options]="options" style="width:100%;height:100%;text-align: center;"></chart>
+    </div>
+    <div *ngIf="display=='grid'" class="list" (scroll)="onScroll($event)">
+        <table class="datatable tablehead">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th *ngFor="let title of data.titles; let i = index; trackBy: index" style="font-weight:bold;" (click)="clickHead(cfg.order[i])">
+                    {{title}}<i *ngIf="cfg.order[i]==orderby" class="fa {{getOrderIcon()}} arrowclass"></i>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let row of data.querysum; let i = index; trackBy: index">
+                <td>&nbsp;</td>
+                <td *ngFor="let code of cfg.order; let i = index; trackBy: index" style="font-weight: bold;">
+                    {{row[code]}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="datatable realtable" id="datatable" name="datatable">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th *ngFor="let title of data.titles; let i = index; trackBy: index" (click)="clickHead(cfg.order[i])" style="font-weight:bold;">
+                    {{title}}<i *ngIf="cfg.order[i]==orderby" class="fa {{getOrderIcon()}} arrowclass"></i>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let row of data.querysum; let i = index; trackBy: index">
+                <td>&nbsp;</td>
+                <td *ngFor="let code of cfg.order; let i = index; trackBy: index" style="font-weight: bold;">
+                    {{row[code]}}
+                </td>
+            </tr>
+            <tr *ngFor="let row of (data.querydata | orderby:orderby:ordertype) ; let i = index; trackBy: index">
+                <td>{{i+1}}</td>
+                <td *ngFor="let code of cfg.order; let i = index; trackBy: index">{{row[code]}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

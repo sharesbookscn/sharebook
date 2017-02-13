@@ -1,0 +1,32 @@
+<div class="login-container">
+    <div class="logo">
+        <img src="assets/img/app.png"/>
+    </div>
+    <div class="content">
+        <div class="row">
+            <span class="msg">{{msg}}</span>
+        </div>
+        <div class="row">
+            <div>
+                <img src="assets/img/user.png"/>
+                <input type="text" [(ngModel)]="userid" placeholder="用户名">
+                <div *ngIf="userid != null && userid.length>0" class="clearinput" (click)="clearInput('userid')">X</div>
+            </div>
+            <!--<md-input placeholder="用户名" [(ngModel)]="userid" align="center" dividerColor="#333">-->
+            <!--</md-input>-->
+        </div>
+        <div class="row">
+            <div>
+                <img src="assets/img/password.png"/>
+                <input type="password" [(ngModel)]="password" placeholder="密   码">
+                <div *ngIf="password != null && password.length>0" class="clearinput" (click)="clearInput('password')">
+                    X
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <button md-raised-button class="loginbutton" [ngClass]="{disabled : logining}" (click)="login()">{{logintext}}</button>
+        </div>
+        <span class="copyright">Copyright©sharesbooks</span>
+    </div>
+</div>

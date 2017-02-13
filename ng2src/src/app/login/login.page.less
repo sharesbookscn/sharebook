@@ -1,0 +1,102 @@
+
+div.login-container{
+  width:100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  div.logo{
+    display: flex;
+    flex:2;
+    width:100%;
+    justify-content: center;
+    align-items: center;
+    >img{
+      width:150px;
+      height:150px;
+    }
+  }
+  div.content{
+    flex:3;
+    width:100%;
+    padding:20px;
+    >div.row{
+      text-align: center;
+      line-height: 50px;
+      z-index: 1;
+      position: relative;
+      span.msg{
+        color:red;
+        text-align: center;
+        display: block;
+      }
+      >div {
+        width: 270px;
+        display: inline-block;
+        position: relative;
+        > img {
+          width: 20px;
+          height: 25px;
+          margin-right: 5px;
+        }
+        > input {
+          width: 240px;
+          background-color: transparent;
+          border: none;
+          border-bottom: 1px solid #c8c8c8;
+          color: #9c9c9c;
+          position: relative;
+          &:focus {
+            outline: none;
+            color: #333;
+            border-bottom: 1px solid #F00;
+          }
+          &::after {
+            content: "x";
+            display: block;
+            background-color: red;
+            font-family: "Microsoft YaHei UI";
+            position: absolute;
+            right: 5px;
+            top: 5px;
+          }
+        }
+        >div.clearinput{
+          display: inline-block;
+          position: absolute;
+          right:5px;
+          top:5px;
+          font-family: cursive;
+          color: #9c9c9c;
+          cursor: pointer;
+          &:hover{
+            color: #F00;
+          }
+        }
+      }
+      .loginbutton{
+        border-radius: 20px;
+        background-color: #1ccda9;
+        color: #fefefe;
+        width: 200px;
+        margin-top:30px;
+      }
+    }
+
+  }
+
+  .md-input-underline{
+    border-color: #c8c8c8;
+  }
+  .md-input-placeholder{
+    color: #9c9c9c;
+  }
+}

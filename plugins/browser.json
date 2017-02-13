@@ -1,0 +1,43 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "phonemanager.ynnewcare.com.cn"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "phonemanager.ynnewcare.com.cn"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "phonemanager.ynnewcare.com.cn"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "phonemanager.ynnewcare.com.cn"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "phonemanager.ynnewcare.com.cn"
+        },
+        "cordova-plugin-code-push": {
+            "PACKAGE_NAME": "phonemanager.ynnewcare.com.cn"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "phonemanager.ynnewcare.com.cn"
+        },
+        "code-push": {
+            "PACKAGE_NAME": "phonemanager.ynnewcare.com.cn"
+        },
+        "cordova-plugin-zip": {
+            "PACKAGE_NAME": "phonemanager.ynnewcare.com.cn"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "phonemanager.ynnewcare.com.cn"
+        }
+    }
+}

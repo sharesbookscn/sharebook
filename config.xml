@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="sharesbooks.cn" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>分享</name>
+    <description>
+        分享
+    </description>
+    <author email="sharesbooks@163.com" href="www.sharesbooks.cn">
+        分享
+    </author>
+    <content src="index.html" />
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <allow-intent href="file:*" />
+    <allow-navigation href="*" />
+    <preference name="android-minSdkVersion" value="16" />
+    <preference name="loadUrlTimeoutValue" value="700000" />
+    <icon src="www/assets/icon/app.png"/>
+    <platform name="android">
+        <preference name="CodePushDeploymentKey" value="P7fMlmhzY3lmcZLO6cdnOS49FZF6V1IGkNG_z" />
+        <allow-intent href="market:*" />
+        <icon src="res/icon.png" density="ldpi" />
+        <icon src="res/icon.png" density="mdpi" />
+        <icon src="res/icon.png" density="hdpi" />
+        <icon src="res/icon.png" density="xhdpi" />
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+        <preference name="CodePushDeploymentKey" value="P7fMlmhzY3lmcZLO6cdnOS49FZF6V1IGkNG_z" />
+    </platform>
+
+</widget>

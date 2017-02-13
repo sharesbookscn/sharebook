@@ -39,9 +39,24 @@
             <template md-tab-label>
                 <i class="fa fa-bars"></i>排行榜
             </template>
-            <div>
-        
-            </div>
+            <md-tab-group class="subtab" >
+                <md-tab  >
+                    <template md-tab-label>
+                        <i class="fa fa-user"></i>个人榜
+                    </template>
+                    <div>
+                        <trending-list></trending-list>
+                    </div>
+                </md-tab>
+                <md-tab  >
+                    <template md-tab-label>
+                        <i class="fa fa-user"></i>联盟榜
+                    </template>
+                    <div>
+                        <trending-list></trending-list>
+                    </div>
+                </md-tab>
+            </md-tab-group>
         </md-tab>
     </md-tab-group>
 </div>

@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '@angular/material';
 import { AppService } from '../app.service'
-import { PieListModule}   from '../pielist/pielist';
+import { TrendingListModule}   from '../trendinglist/trendinglist';
 
 
 @Component({
@@ -26,7 +26,7 @@ export class MainPageComponent implements AfterViewChecked {
     }
 
     topSelectChange(event:any) {
-        console.log("topSelectChange ",event.index)
+        console.log("topSelectChange ",event.index);
         this.topTabIndex = event.index;
          //this.elementRef.nativeElement.querySelector(".datatable.tablehead:visible").hide();
     }
@@ -77,7 +77,7 @@ export class MainPageComponent implements AfterViewChecked {
 
 
 @NgModule({
-    imports: [CommonModule, MaterialModule, PieListModule],
+    imports: [CommonModule, MaterialModule, TrendingListModule],
     declarations: [MainPageComponent],
     exports: [MainPageComponent],
     providers: [AppService]

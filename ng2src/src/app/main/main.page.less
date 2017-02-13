@@ -79,20 +79,25 @@ main-page {
       flex: 0 0 50px;
       display: flex;
       flex-direction: row;
-      > .md-tab-label-container >.md-tab-list > .md-tab-label {
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 40px;
-        text-align: center;
-        min-width: 80px;
-        padding: 5px 0px;
-        text-align: center;
-        font-family: "Microsoft YaHei UI";
-        &.md-tab-label-active {
-          color: #029efd;
-          border-bottom: 2px solid #ff4081;
-        }
+      > .md-tab-label-container >.md-tab-list {
+        display:flex;
+        flex-direction: row;
+        > .md-tab-label {
+          flex:1;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 40px;
+          text-align: center;
+          min-width: 80px;
+          padding: 5px 0px;
+          text-align: center;
+          font-family: "Microsoft YaHei UI";
+          &.md-tab-label-active {
+            color: #029efd;
+            border-bottom: 2px solid #ff4081;
+          }
 
+        }
       }
     }
 

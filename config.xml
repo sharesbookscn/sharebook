@@ -22,7 +22,7 @@
     <preference name="loadUrlTimeoutValue" value="700000" />
     <icon src="www/assets/icon/app.png"/>
     <platform name="android">
-        <preference name="CodePushDeploymentKey" value="P7fMlmhzY3lmcZLO6cdnOS49FZF6V1IGkNG_z" />
+        <preference name="CodePushDeploymentKey" value="hNOIFfJseCe7zA_MuBgQ1GSBxMa9VJtXz89uf" />
         <allow-intent href="market:*" />
         <icon src="res/icon.png" density="ldpi" />
         <icon src="res/icon.png" density="mdpi" />
@@ -32,7 +32,7 @@
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
-        <preference name="CodePushDeploymentKey" value="P7fMlmhzY3lmcZLO6cdnOS49FZF6V1IGkNG_z" />
+        <preference name="CodePushDeploymentKey" value="hNOIFfJseCe7zA_MuBgQ1GSBxMa9VJtXz89uf" />
     </platform>
 
 </widget>

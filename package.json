@@ -14,7 +14,7 @@
     "run_android": "cd /d E:/Android/sdk/platform-tools/ && adb kill-server &&adb start-server && adb.exe uninstall phonemanager.ynnewcare.cn   & cd /d D:/work/managerapp & cordova run android --nobuild ",
     "chcp": "cordova-hcp server",
     "start1": "phonegap serve --port 3003 --autoload --browser",
-    "release": "code-push release-cordova managerapp android ",
+    "release": "code-push release-cordova sharebook android ",
     "http": " http-server dev/",
     "avd": " %ANDROID_HOME%/tools/emulator.exe -avd test ",
     "build:release": "cordova build android --release -- --keystore=\"./app.keystore\" --storePassword=xkyl2017 --alias=xkyl",

@@ -1,42 +1,49 @@
 <div style="display: flex; flex-direction: column;background-color: white;width:100%;height:100%;">
     <md-card class="account">
         <div class="headimg">
-            <img src="../../assets/img/app.png"/>
+            <img src="./assets/img/app.png"/>
         </div>
         <div class="info">
+            <div>
             <span style="font-size: larger">张三</span>
-            <span style="margin-left:75px;">爱书联盟</span>
-            <br>
+            <span style="float:right;">爱书联盟</span>
+            </div>
+            <div  style="margin-top:10px;">
             <span>信誉等级
                 <font color="blue">5级</font>
             </span>
-            <span>分享等级
+            <span style="float:right;">分享等级
                 <font color="blue">2级</font>
             </span>
+            </div>
         </div>
     </md-card>
-    <md-card style="overflow-y: auto;">
-        <md-list class="sharelist">
+    <md-card style="overflow-y: auto;padding-top:0;margin-top:5px;">
+        <md-list class="sharelist" style="padding-top:0;">
             <md-list-item class=" {{show1?'active':''}}">
                 <i class="fa fa-cubes"></i>
                 <div class="right {{show1?'active':''}}" (click)="show1=!show1">租借历史</div>
-                <book-list *ngIf="show1"></book-list>
+                
             </md-list-item>
+            <book-list *ngIf="show1"></book-list>
             <md-list-item class="{{show2?'active':''}}">
                 <i class="fa fa-cube"></i>
                 <div class="right " (click)="show2=!show2">分享历史</div>
-                <book-list *ngIf="show2"></book-list>
+                
             </md-list-item>
+            <book-list *ngIf="show2"></book-list>
             <md-list-item  class="{{show3?'active':''}}">
                 <i class="fa fa-list"></i>
                 <div class="right" (click)="show3=!show3">租借列表</div>
-                <book-list *ngIf="show3"></book-list>
+                
             </md-list-item>
+            <book-list *ngIf="show3"></book-list>
             <md-list-item  class="{{show4?'active':''}}">
                 <i class="fa fa-podcast"></i>
                 <div class="right " (click)="show4=!show4">我的关注</div>
-                <book-list *ngIf="show4" style="margin-top: 60px;"></book-list>
+                
             </md-list-item>
+            <book-list *ngIf="show4" style="margin-top: 60px;"></book-list>
         </md-list>
     
     </md-card>

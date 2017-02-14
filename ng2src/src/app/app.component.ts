@@ -5,8 +5,6 @@ import '@angular/material/core/theming/prebuilt/deeppurple-amber.css';
 import './app.component.less';
 import './main/main.page.less';
 
-
-
 @Component({
     selector: 'app',
     template: '<router-outlet></router-outlet>' ,

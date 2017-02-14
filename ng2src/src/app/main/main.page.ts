@@ -6,6 +6,9 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '@angular/material';
 import { AppService } from '../app.service'
 import { TrendingListModule}   from '../trendinglist/trendinglist';
+import { AccountInfoModule}   from '../accountinfo/accountinfo';
+import { BookListModule}   from '../booklist/booklist';
+import { BookInModule}   from '../bookin/bookin';
 
 
 @Component({
@@ -77,7 +80,7 @@ export class MainPageComponent implements AfterViewChecked {
 
 
 @NgModule({
-    imports: [CommonModule, MaterialModule, TrendingListModule],
+    imports: [CommonModule, MaterialModule, TrendingListModule,AccountInfoModule,BookListModule,BookInModule],
     declarations: [MainPageComponent],
     exports: [MainPageComponent],
     providers: [AppService]

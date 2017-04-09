@@ -153,6 +153,12 @@ module.exports = function (options) {
                 },
                 '/lib/**': {
                     target: 'http://localhost:3002'
+                },
+                '/cordova**': {
+                    target: 'http://localhost:3003'
+                },
+                '/plugins/**': {
+                    target: 'http://localhost:3003'
                 }
             },
         },

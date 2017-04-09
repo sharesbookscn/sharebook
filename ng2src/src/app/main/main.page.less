@@ -12,59 +12,61 @@ main-page {
     flex: 1;
     display: flex;
     flex-direction: column;
-    > .md-tab-header {
+    > .mat-tab-header {
       flex: 0 0 60px;
       order: 2;
       display: flex;
       flex-direction: row;
       border-top: 1px solid #e1e4e3;
       background-color: #eff3f2;
-      > .md-tab-label-container >.md-tab-list {
+      > .mat-tab-label-container >.mat-tab-list   {
         > md-ink-bar{
           display: none;
         }
-        > .md-tab-label {
-          min-width: 40px;
-          height:58px;
-          padding: 5px 0 0 0 ;
-          flex: 1;
-          font-weight: 500;
-          font-size: 14px;
-          line-height: 24px;
-          text-align: center;
-          font-family: "Microsoft YaHei UI";
-          >md-ripple-background{
-            display: none;
-          }
-          &.md-tab-label-active {
-            color: #029efd;
-            & > i.fa {
-              color: #029efd;
-              -webkit-text-stroke: 1.0px #029efd;
+        >.mat-tab-labels {
+          > .mat-tab-label {
+            min-width: 40px;
+            height: 58px;
+            padding: 5px 0 0 0;
+            flex: 1;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 24px;
+            text-align: center;
+            font-family: "Microsoft YaHei UI";
+            > md-ripple-background {
+              display: none;
             }
-          }
-          & > i.fa {
-            font-size: 28px;
-            display: block;
-            color: rgba(0, 0, 0, 0);
-            -webkit-text-stroke: 1.0px #000;
+            &.mat-tab-label-active {
+              color: #029efd;
+              & > i.fa {
+                color: #029efd;
+                -webkit-text-stroke: 1.0px #029efd;
+              }
+            }
+            & > i.fa {
+              font-size: 28px;
+              display: block;
+              color: rgba(0, 0, 0, 0);
+              -webkit-text-stroke: 1.0px #000;
+            }
           }
         }
       }
     }
-    > .md-tab-body-wrapper {
+    > .mat-tab-body-wrapper {
       > md-tab-body  {
         width: 100%;
         overflow: hidden;
-        &.md-tab-body-active{
+        &.mat-tab-body-active{
           overflow: hidden;
         }
       }
     }
-    > .md-tab-body-wrapper {
+    > .mat-tab-body-wrapper {
       flex: 1;
       order: 1;
-      > .md-tab-body {
+      > .mat-tab-body {
       }
     }
   }
@@ -75,26 +77,28 @@ main-page {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    > .md-tab-header {
+    > .mat-tab-header {
       flex: 0 0 50px;
       display: flex;
       flex-direction: row;
-      > .md-tab-label-container >.md-tab-list {
+      > .mat-tab-label-container >.mat-tab-list {
         display:flex;
         flex-direction: row;
-        > .md-tab-label {
-          flex:1;
-          font-weight: 500;
-          font-size: 14px;
-          line-height: 40px;
-          text-align: center;
-          min-width: 80px;
-          padding: 5px 0px;
-          text-align: center;
-          font-family: "Microsoft YaHei UI";
-          &.md-tab-label-active {
-            color: #029efd;
-            border-bottom: 2px solid #ff4081;
+        >.mat-tab-labels {
+          > .mat-tab-label {
+            flex: 1;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 40px;
+            text-align: center;
+            min-width: 80px;
+            padding: 5px 0px;
+            text-align: center;
+            font-family: "Microsoft YaHei UI";
+            &.mat-tab-label-active {
+              color: #029efd;
+              border-bottom: 2px solid #ff4081;
+            }
           }
         }
       }
@@ -125,10 +129,10 @@ main-page {
       border-width: 5px 5px 0 2px;
     }
   }
-  .md-tab-label{
+  .mat-tab-label{
     position: relative;
   }
-  .md-tab-body-content{
+  .mat-tab-body-content{
     width:100%;
     height:100%;
     box-sizing: content-box;
@@ -136,10 +140,10 @@ main-page {
   md-ink-bar{
     display: none;
   }
-  .md-tab-header{
+  .mat-tab-header{
     border-bottom: none;
   }
-  div.md-tab-header-pagination.md-tab-header-pagination-disabled{
+  div.mat-tab-header-pagination.mat-tab-header-pagination-disabled{
     display: none;
   }
 

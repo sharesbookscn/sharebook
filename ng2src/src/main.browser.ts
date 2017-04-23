@@ -25,11 +25,12 @@ export function main(): Promise<any> {
 console.log(window['device']);
 if(!window['device']){
     bootloader(main);
+}else{
+    document.addEventListener("deviceready", function () {
+        window.codePush.sync(syncStatus, null, downloadProgress);
+        bootloader(main);
+    }, false);
 }
-document.addEventListener("deviceready", function () {
-    window.codePush.sync(syncStatus, null, downloadProgress);
-    bootloader(main);
-}, false);
 
 
 function syncStatus(status) {

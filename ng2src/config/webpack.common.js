@@ -145,11 +145,11 @@ module.exports = function(options) {
                 // },
                 {
                     test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?.*$|$)/,
-                    loader: 'url-loader?limit=100000&name=/[name].[ext]'
+                    use: 'url-loader?limit=100000&name=/[name].[ext]'
                 },
                 {
                     test: /\.less/,
-                    loader: ExtractTextPlugin.extract({ fallbackLoader: "style-loader", loader: "css-loader!less-loader" })
+                    use: ExtractTextPlugin.extract({ fallback: "style-loader", use: "css-loader!less-loader" })
                 },
             ],
         },

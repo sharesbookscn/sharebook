@@ -19,7 +19,7 @@ const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin-2");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 //const ExtractTextPlugin = require("extract-text-webpack-plugin");
 /*
  * Webpack Constants
@@ -35,7 +35,7 @@ const METADATA = {
  *
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
-module.exports = function (options) {
+module.exports = function(options) {
     isProd = options.env === 'production';
     return {
         /*
@@ -149,7 +149,7 @@ module.exports = function (options) {
                 },
                 {
                     test: /\.less/,
-                    loader: ExtractTextPlugin.extract({ fallbackLoader: "style-loader", loader: "css-loader!less-loader"})
+                    loader: ExtractTextPlugin.extract({ fallbackLoader: "style-loader", loader: "css-loader!less-loader" })
                 },
             ],
         },
@@ -213,10 +213,13 @@ module.exports = function (options) {
              * See: https://www.npmjs.com/package/copy-webpack-plugin
              */
             new CopyWebpackPlugin([
-                {from: 'ng2src/src/assets', to: 'assets'},
-                {from: 'ng2src/src/meta'},
-                {from: 'ng2src/src/firstpage.js',to: 'firstpage.bundle.js'
-                ,transform:helpers.replaceRequire}
+                { from: 'ng2src/src/assets', to: 'assets' },
+                { from: 'ng2src/src/meta' },
+                {
+                    from: 'ng2src/src/firstpage.js',
+                    to: 'firstpage.bundle.js',
+                    transform: helpers.replaceRequire
+                }
             ]),
 
 

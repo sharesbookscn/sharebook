@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import "bootstrap/less/bootstrap.less";
 import "font-awesome/less/font-awesome.less";
-import '@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 import './app.component.less';
 import './main/main.page.less';
 

@@ -1,6 +1,7 @@
 import {NgModule}       from '@angular/core';
 import {HttpModule ,JsonpModule }       from '@angular/http';
 import {BrowserModule}  from '@angular/platform-browser';
+import {BrowserAnimationsModule}  from '@angular/platform-browser/animations';
 
 /* App Root */
 import {AppComponent}   from './app.component';
@@ -17,7 +18,7 @@ import {APP_BASE_HREF} from '@angular/common';
         BrowserModule,
         HttpModule,JsonpModule,
         AppRoutingModule,
-        BrowserModule
+        BrowserAnimationsModule
     ],
     declarations: [AppComponent],
     providers: [AppService,{provide: APP_BASE_HREF, useValue: '/'}],

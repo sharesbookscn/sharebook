@@ -34,7 +34,7 @@ export class BookInComponent {
     get() {
         var request = new XMLHttpRequest();
         request.open("GET", "http://www.google.com", true);
-        request.onreadystatechange = function() {
+        request.onreadystatechange = function () {
             if (request.readyState == 4) {
                 if (request.status == 200 || request.status == 0) {
                     // -> request.responseText <- is a result
@@ -44,39 +44,43 @@ export class BookInComponent {
         request.send();
     }
     getBookInfo(barcode: string) {
+        console.log("getBookInfo==",barcode);
         var request = new XMLHttpRequest();
         const url = "https://api.douban.com/v2/book/isbn/" + barcode;
         request.open("GET", url, true);
-        request.onreadystatechange = function() {
+        request.onreadystatechange = function () {
+            console.log("onreadystatechange===",request)
             if (request.readyState == 4) {
                 if (request.status == 200 || request.status == 0) {
-                    this.ngZone.runOutsideAngular(() => {
+                    this.ngZone.run(() => {
+                        console.log("----update data ---------");
                         this.scaninfo = JSON.parse(request.responseText);
                     });
                 }
             }
         }.bind(this)
         request.send();
+        console.log("end send ==");
     }
     testBarcode() {
         this.getBookInfo('9787543632608');
     }
-    getImgUrl(){
-        return this.scaninfo.images?this.scaninfo.images.large : './assets/img/app.png';
+    getImgUrl() {
+        return this.scaninfo.images ? this.scaninfo.images.large : './assets/img/app.png';
     }
-    getUrl(type){
+    getUrl(type) {
         return this.scaninfo[type] || ' ';
     }
     scan() {
         cordova.plugins.barcodeScanner.scan(
             function (result) {
-                this.ngZone.runOutsideAngular(() => {
-                    this.result = result;
+                console.log(result);
+                this.ngZone.run(() => {
                     this.getBookInfo(result.text);
                 });
             }.bind(this),
             function (error) {
-                alert("Scanning failed: " + error);
+                alert("扫描失败: 请重试!");
             }.bind(this),
             {
                 preferFrontCamera: false, // iOS and Android

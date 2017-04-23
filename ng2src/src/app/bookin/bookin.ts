@@ -86,7 +86,7 @@ export class BookInComponent {
                 preferFrontCamera: false, // iOS and Android
                 showFlipCameraButton: false, // iOS and Android
                 showTorchButton: true, // iOS and Android
-                torchOn: true, // Android, launch with the torch switched on (if available)
+                torchOn: false, // Android, launch with the torch switched on (if available)
                 prompt: "请对准条形码", // Android
                 resultDisplayDuration: 500, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
                 formats: "EAN_13", // default: all but PDF_417 and RSS_EXPANDED

@@ -1,24 +1,23 @@
 <md-card class="bookinfo">
     <div>
-        <img src="./assets/img/app.png" />
-        <span>点击更换图片</span>
+        <img src="{{getImgUrl()}}" />
     </div>
     <div class="info">
         <dl>
             <dt>书名</dt>
-            <dd> 小猪佩奇</dd>
+            <dd>{{getUrl('title')}}</dd>
             <dt>出版社</dt>
-            <dd> 东方出版社 </dd>
-            <dt>书龄</dt>
-            <dd>2年</dd>
-            <dt style="height: 60px;">简介</dt>
-            <dd> 小猪佩奇是一本幼儿教育类型的书籍</dd>
+            <dd>{{getUrl('publisher')}}</dd>
+            <dt>出版时间</dt>
+            <dd>{{getUrl('pubdate')}}</dd>
+            <dt>简介</dt>
+            <dd class='summary'>{{getUrl('summary')}}</dd>
         </dl>
-        result:{{result |json}}<br> scaninfo: {{scaninfo |json}}
     </div>
 </md-card>
 
 <md-card class="selecttype">
     <button md-raised-button style="background-color:saddlebrown;color: white;" (click)="scan()">扫描</button><br>
     <button md-raised-button style="background-color:green;color: white;">分享</button>
+    <!--<button md-raised-button style="background-color:green;color: white;" (click)="testBarcode()">获取图书信息</button>-->
 </md-card>

@@ -1,19 +1,20 @@
 md-card.bookinfo {
   padding-bottom: 0;
-  flex:1;
+  flex: 0 0 350px;
+  display: flex;
+  flex-direction: row;
   >div:first-child{
-    width:100px;
-    height:100px;
-    line-height: 100px;
+    flex: 0 0 200px;
+    height:300px;
+    line-height: 300px;
     color:blue;
-    border-radius: 50px;
-    border:1px solid #ededed;
+    //border-radius: 50px;
+    //border:1px solid #ededed;
     text-align: center;
     margin:0 auto;
-    position: relative;
     >img{
-      width:80px;
-      height:80px;
+      max-width:200px;
+      max-height:300px;
     }
     >span{
       font-size:9px;
@@ -27,6 +28,8 @@ md-card.bookinfo {
     }
   }
   >div.info{
+    flex:1;
+    padding-left:10px;
     dl {
       width:100%;
       padding-top:10px;
@@ -34,14 +37,20 @@ md-card.bookinfo {
     dt , dd{
       height: 30px;
       line-height: 30px;
-      display: inline-block;
+      display: block;
     }
     dt{
-      width:80px;
+      // width:80px;
       vertical-align: middle;
     }
     dd{
-      width: calc(~"100% - 80px");
+      // width: calc(~"100% - 80px");
+    }
+    dd.summary{
+      min-height:30px;
+      height:90px;
+      line-height:30px;
+      overflow: hidden;
     }
   }
 }

@@ -1,10 +1,12 @@
-import { Component, Input, ViewChild, ElementRef, AfterViewInit, AfterViewChecked, Renderer, Pipe 
-    ,NgZone} from '@angular/core';
+import {
+    Component, Input, ViewChild, ElementRef, AfterViewInit, AfterViewChecked, Renderer, Pipe
+    , NgZone
+} from '@angular/core';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Http,HttpModule } from '@angular/http';
+import { Http, HttpModule, RequestOptions, Request, RequestMethod, Headers } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { AppService } from '../app.service'
 import { Router } from '@angular/router';
@@ -19,22 +21,58 @@ declare var cordova: any;
 })
 
 export class BookInComponent {
-    scaninfo:any={};
-    result:any={};
+    scaninfo: any = {};
+    result: any = {};
     constructor(private util: AppService
         , private router: Router
         , private renderer: Renderer
-        , private elem: ElementRef , private http:Http,private ngZone :NgZone) {
+        , private elem: ElementRef, private http: Http, private ngZone: NgZone) {
 
         // renderer.listenGlobal('document', 'scroll', this.onScroll.bind(this));
+    }
+
+    get() {
+        var request = new XMLHttpRequest();
+        request.open("GET", "http://www.google.com", true);
+        request.onreadystatechange = function() {
+            if (request.readyState == 4) {
+                if (request.status == 200 || request.status == 0) {
+                    // -> request.responseText <- is a result
+                }
+            }
+        }
+        request.send();
+    }
+    getBookInfo(barcode: string) {
+        var request = new XMLHttpRequest();
+        const url = "https://api.douban.com/v2/book/isbn/" + barcode;
+        request.open("GET", url, true);
+        request.onreadystatechange = function() {
+            if (request.readyState == 4) {
+                if (request.status == 200 || request.status == 0) {
+                    this.ngZone.runOutsideAngular(() => {
+                        this.scaninfo = JSON.parse(request.responseText);
+                    });
+                }
+            }
+        }.bind(this)
+        request.send();
+    }
+    testBarcode() {
+        this.getBookInfo('9787543632608');
+    }
+    getImgUrl(){
+        return this.scaninfo.images?this.scaninfo.images.large : './assets/img/app.png';
+    }
+    getUrl(type){
+        return this.scaninfo[type] || ' ';
     }
     scan() {
         cordova.plugins.barcodeScanner.scan(
             function (result) {
-                this._ngZone.runOutsideAngular(() => {
+                this.ngZone.runOutsideAngular(() => {
                     this.result = result;
-                    const url = "https://api.douban.com/v2/book/isbn/"+result.text;
-                    this.http.get(url).subscribe((res:Response) => this.scaninfo = res.json());
+                    this.getBookInfo(result.text);
                 });
             }.bind(this),
             function (error) {

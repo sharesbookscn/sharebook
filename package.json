@@ -6,7 +6,7 @@
     "license": "MIT",
     "scripts": {
         "update_npm": "ncu -u",
-        "open_apk_folder": "cd /D D:\\worknew\\sharebook\\platforms\\android\\build\\outputs\\apk\\ && explorer .  ",
+        "open_apk_folder": "cd /D D:\\worknew\\sharebook\\platforms\\android\\build\\outputs\\apk\\ && explorer . || echo 打开成功 ",
         "init": "npm install && typing install ",
         "update_manifest_prod": "node tools/update-manifest www www/manifest.json",
         "build:prod:once": "webpack --config ng2src/config/webpack.prod.js",

@@ -1,15 +1,15 @@
-import {Component, Injectable, ViewContainerRef} from '@angular/core';
-import {NgModule}      from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {CommonModule} from '@angular/common';
-import {HttpModule, JsonpModule, Jsonp} from '@angular/http';
-import {MaterialModule, MdSnackBar, MdSnackBarModule, MdSnackBarConfig} from '@angular/material';
-import {FormsModule}   from '@angular/forms';
+import { Component, Injectable, ViewContainerRef } from '@angular/core';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { HttpModule, JsonpModule, Jsonp } from '@angular/http';
+import { MaterialModule, MdSnackBar, MdSnackBarModule, MdSnackBarConfig } from '@angular/material';
+import { FormsModule } from '@angular/forms';
 
 import './login.page.less'
-import {AppService} from '../app.service'
-import {Router} from '@angular/router';
-import {Observable} from "rxjs";
+import { AppService } from '../app.service'
+import { Router } from '@angular/router';
+import { Observable } from "rxjs";
 let md5 = require('blueimp-md5/js/md5.js');
 
 @Component({
@@ -60,33 +60,10 @@ export class LoginPageComponent {
     }
 
     login(): void {
-        this.router.navigate(['/main']);
-        return ;
-        // if (this.logining) {
-        //     return;
-        // }
-        // window.localStorage.setItem("userid", this.userid);
-        // this.logininter = setInterval((data) => {
-        //     console.log(" do ing ......");
-        //     this.gatherLoginText();
-        // }, 100);
-        // // this.logining = true;
-        // setTimeout(() => {
-        //     this.util.login({userid: this.userid, pwd: md5(this.password)})
-        //         .then((data: any) => {
-        //             this.msg = data.msg;
-        //             this.logining = false;
-        //             this.resetLoginText();
-        //             clearInterval(this.logininter);
-        //             if (data.success === true) {
-        //                 window.localStorage.setItem("password", this.password);
-        //                 this.router.navigate(['/main']);
-        //             }
-        //         }).fail(() => {
-        //         this.logining = false;
-        //         clearInterval(this.logininter);
-        //     }, 0)
-        // });
+        //this.router.navigate(['/main']);
+        //return ;
+        this.util.testMqtt();
+        
     }
 
     cancel(): void {

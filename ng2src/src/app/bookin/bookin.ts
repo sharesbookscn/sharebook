@@ -31,36 +31,20 @@ export class BookInComponent {
         // renderer.listenGlobal('document', 'scroll', this.onScroll.bind(this));
     }
 
-    get() {
-        var request = new XMLHttpRequest();
-        request.open("GET", "http://www.google.com", true);
-        request.onreadystatechange = function () {
-            if (request.readyState == 4) {
-                if (request.status == 200 || request.status == 0) {
-                    // -> request.responseText <- is a result
-                }
-            }
-        }
-        request.send();
-    }
     getBookInfo(barcode: string) {
-        console.log("getBookInfo==",barcode);
         var request = new XMLHttpRequest();
         const url = "https://api.douban.com/v2/book/isbn/" + barcode;
         request.open("GET", url, true);
         request.onreadystatechange = function () {
-            console.log("onreadystatechange===",request)
             if (request.readyState == 4) {
                 if (request.status == 200 || request.status == 0) {
                     this.ngZone.run(() => {
-                        console.log("----update data ---------");
                         this.scaninfo = JSON.parse(request.responseText);
                     });
                 }
             }
         }.bind(this)
         request.send();
-        console.log("end send ==");
     }
     testBarcode() {
         this.getBookInfo('9787543632608');

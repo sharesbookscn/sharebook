@@ -8,7 +8,9 @@ class User {
     public username: string;
     public menu: Array<any>;
 }
-let mqtt = require('mqtt');
+import { connect , Client,Store } from 'mqtt';
+// console.log(MQTT);
+// let mqtt = require('mqtt/webmqtt');
 @Injectable(
 
 )
@@ -16,10 +18,14 @@ export class AppService {
     user: User = { userid: null, username: null, menu: null };
     logined = false;
     constructor(private jsonp: Jsonp, private router: Router) {
+        this.connectMqtt();
     }
-    public testMqtt() {
+    public connectMqtt() {
         console.log("connect...")
-        var client = mqtt.connect("mqtt://localhost:3002");
+        //console.log(mqtt);
+        //var mqtt = MQTT.mqtt;
+        var client = connect(Config.mqttserver);
+        console.log(client.options.clientId);
         client.on("error", function (err) {
             console.log("error...", err)
         });
@@ -28,8 +34,7 @@ export class AppService {
         client.subscribe("mqtt/demo");
 
         client.on("message", function (topic, payload) {
-            console.log("message...")
-
+            console.log("message...");
             alert([topic, payload].join(": "));
             client.end();
         });
@@ -37,6 +42,7 @@ export class AppService {
         client.on("connect", function (connack) {
             console.log("connect....");
             console.log(connack);
+            console.log(client);
         });
 
         console.log("publish...")

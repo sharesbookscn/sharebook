@@ -62,8 +62,6 @@ export class LoginPageComponent {
     login(): void {
         //this.router.navigate(['/main']);
         //return ;
-        this.util.testMqtt();
-        
     }
 
     cancel(): void {

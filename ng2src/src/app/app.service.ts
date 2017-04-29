@@ -8,53 +8,88 @@ class User {
     public username: string;
     public menu: Array<any>;
 }
-import { connect , Client,Store } from 'mqtt';
-// console.log(MQTT);
-// let mqtt = require('mqtt/webmqtt');
+import { connect, Client, Store } from 'mqtt';
 @Injectable(
 
 )
 export class AppService {
     user: User = { userid: null, username: null, menu: null };
     logined = false;
+    private mqttclient: any;
+    err: any;
+    errmsg: string;
+    deviceId = (window['device'] && window['device'].uuid)? window['device'].uuid : this.guid();
     constructor(private jsonp: Jsonp, private router: Router) {
-        this.connectMqtt();
+        this.initMqtt();
     }
-    public connectMqtt() {
-        console.log("connect...")
-        //console.log(mqtt);
-        //var mqtt = MQTT.mqtt;
-        var client = connect(Config.mqttserver);
-        console.log(client.options.clientId);
-        client.on("error", function (err) {
-            console.log("error...", err)
+    private messageListeners = {};
+    private messageListeneruuids = [];
+    private initMqtt() {
+        this.mqttclient = connect(Config.server);
+        this.mqttclient.on("error", (err) => {
+            this.err = err;
+            this.errmsg = "服务器连接失败!请重试!";
         });
-        console.log("subscribe...")
-
-        client.subscribe("mqtt/demo");
-
-        client.on("message", function (topic, payload) {
-            console.log("message...");
-            alert([topic, payload].join(": "));
-            client.end();
+        //订阅clientid
+        this.mqttclient.subscribe(this.mqttclient.options.clientId);
+        this.mqttclient.on("message", (topic, payload)=>{
+            Object.keys(this.messageListeners).forEach((key)=>{
+                var val = this.messageListeners[key];
+                val(topic, payload);
+            });
+            // this.messageListeners.forEach((func) => func(topic, payload));
         });
-
-        client.on("connect", function (connack) {
-            console.log("connect....");
-            console.log(connack);
-            console.log(client);
+        this.mqttclient.on("connect", (connack)=> {
+            const msg = {deviceid: this.deviceId };
+            this.req("regdevice",msg).then((data)=>{
+                console.log(data);
+                console.log(data.toString());
+            });
         });
-
-        console.log("publish...")
-
-        client.publish("mqtt/demo", "hello world!");
-    }
-    public request(url: any): any {
-        if (!this.logined) {
-            this.router.navigate(['/login']);
-            return new Promise(function (resolve, reject) { resolve(false); });
+    } 
+    public guid() {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
         }
-        return this.requestNoAuth(url);
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+            s4() + '-' + s4() + s4() + s4();
+    }
+    /**
+     * 
+     * @param param 
+     * @param callback  必须是promise
+     */
+    public req(type:string , param: any): any {
+        return new Promise((resolve, reject) => {
+            try {
+                const uuid = this.guid();
+                this.messageListeneruuids.push(uuid);
+                const data = { type: type, uuid: uuid, param: param };
+                //callback必须是promise
+                let func = (topic, payload) => {
+                    //从列表中移除uuid
+                    for (var i = this.messageListeneruuids.length - 1; i > -1; i--) {
+                        if (this.messageListeneruuids[i] === uuid) {
+                            this.messageListeneruuids.splice(i, 1);
+                        }
+                    }
+                    //并从lisenors中移除函数
+                    delete this.messageListeners[uuid];
+                    //返回结果
+                    resolve(JSON.parse(payload.toString()).data);
+                }
+                this.messageListeners[uuid] = func;
+                this.mqttclient.publish("server", JSON.stringify(data));
+            } catch (ex) {
+                reject(ex);
+            }
+        });
+
+    }
+    public listen(callback) {
+
     }
     public checklogin(): boolean {
         if (!this.logined) {

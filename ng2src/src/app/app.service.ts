@@ -41,10 +41,7 @@ export class AppService {
         });
         this.mqttclient.on("connect", (connack)=> {
             const msg = {deviceid: this.deviceId };
-            this.req("regdevice",msg).then((data)=>{
-                console.log(data);
-                console.log(data.toString());
-            });
+            this.req("regdevice",msg);
         });
     } 
     public guid() {

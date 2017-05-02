@@ -60,8 +60,14 @@ export class LoginPageComponent {
     }
 
     login(): void {
-        //this.router.navigate(['/main']);
-        //return ;
+        this.util.req("login",{userid:this.userid,password:this.password})
+        .then((data)=>{
+            console.log(data);
+            this.msg = data.msg;
+            if(data.success){
+                this.router.navigate(['/main']);
+            }
+        })
     }
 
     cancel(): void {

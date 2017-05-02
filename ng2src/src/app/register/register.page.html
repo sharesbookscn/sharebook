@@ -25,11 +25,19 @@
             </div>
         </div>
         <div class="row">
-        <button md-raised-button class="loginbutton" [ngClass]="{disabled : logining}" (click)="login()">{{logintext}}</button>
+            <div>
+                <img src="assets/img/password.png"/>
+                <input type="password" [(ngModel)]="rppassword" placeholder="重复密码">
+                <div *ngIf="rppassword != null && rppassword.length>0" class="clearinput" (click)="clearInput('rppassword')">
+                    X
+                </div>
+            </div>
         </div>
         <div class="row">
-            <a (click)="gotoregister()">新用户注册</a>
+        <button md-raised-button class="loginbutton" [ngClass]="{disabled : logining}" (click)="register()">注册</button>
+        <button md-raised-button class="loginbutton" [ngClass]="{disabled : logining}" (click)="gotologin()">返回</button>
         </div>
+        
         <span class="copyright">Copyright©sharesbooks</span>
     </div>
 </div>

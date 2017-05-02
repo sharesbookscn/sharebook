@@ -3,28 +3,14 @@ import {Routes, RouterModule} from '@angular/router';
 
 import { MainPageModule ,MainPageComponent}   from './main/main.page';
 import { LoginPageModule ,LoginPageComponent}   from './login/login.page';
+import { RegisterPageModule , RegisterPageComponent}   from './register';
 
-function routeItem(name:string) {
-    const uperName = name.substr(0, 1).toUpperCase() + name.substring(1);
-    return {
-        path: name,
-        loadChildren: () =>  new Promise(function (resolve) {
-            (require as any).ensure([], function (require: any) {
-                resolve( require('app/'+name+'/'+name+'.module')[uperName+'Module']);
-            });
-        }),
-    }
-};
-function menuItem(name:string) {
-    const item= routeItem(name);
-    item["outlet"]="menu";
-    return item;
-};
 
 export const routes: Routes = [
     {path: '', redirectTo: '/login', pathMatch: 'full'},
     {path: 'login', component: LoginPageComponent},
     {path: 'main', component: MainPageComponent},
+    {path: 'register', component: RegisterPageComponent},
 ];
 
 function provideRoutes(routes) {
@@ -34,7 +20,7 @@ function provideRoutes(routes) {
 }
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, {useHash: true}),LoginPageModule,MainPageModule],
+    imports: [RouterModule.forRoot(routes, {useHash: true}),LoginPageModule,MainPageModule,RegisterPageModule],
     exports: [RouterModule],
     providers: [provideRoutes(routes)]
 })

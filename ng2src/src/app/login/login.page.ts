@@ -58,16 +58,21 @@ export class LoginPageComponent {
     resetLoginText(): void {
         this.logintext = "登录";
     }
-
     login(): void {
+        this.msg = "";
+        window.localStorage.setItem("userid",this.userid);
         this.util.req("login",{userid:this.userid,password:this.password})
         .then((data)=>{
             console.log(data);
             this.msg = data.msg;
             if(data.success){
+                window.localStorage.setItem("password",this.password);
                 this.router.navigate(['/main']);
             }
         })
+    }
+    gotoregister():void{
+        this.router.navigate(['/register']);
     }
 
     cancel(): void {

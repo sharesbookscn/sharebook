@@ -18,6 +18,7 @@
 
 <md-card class="selecttype">
     <button md-raised-button style="background-color:saddlebrown;color: white;" (click)="scan()">扫描</button><br>
-    <button md-raised-button style="background-color:green;color: white;">分享</button>
+    <button md-raised-button style="background-color:green;color: white;"  (click)="share()">分享</button>
     <!--<button md-raised-button style="background-color:green;color: white;" (click)="testBarcode()">获取图书信息</button>-->
+    <span [style]="('display:block;color:'+(success==true?'green':'red'))|safecss"  *ngIf="msg">{{msg}}</span>
 </md-card>

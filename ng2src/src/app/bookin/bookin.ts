@@ -23,6 +23,8 @@ declare var cordova: any;
 export class BookInComponent {
     scaninfo: any = {};
     result: any = {};
+    private msg:string;
+    private success:boolean;
     constructor(private util: AppService
         , private router: Router
         , private renderer: Renderer
@@ -59,6 +61,10 @@ export class BookInComponent {
         cordova.plugins.barcodeScanner.scan(
             function (result) {
                 console.log(result);
+                if(result.text==='test'){
+                    //测试时使用
+                    result.text='9787543632608';
+                }
                 this.ngZone.run(() => {
                     this.getBookInfo(result.text);
                 });
@@ -79,6 +85,17 @@ export class BookInComponent {
                 disableSuccessBeep: false // iOS
             }
         );
+    }
+    share() {
+        if (!this.scaninfo) {
+            alert("请扫描书籍二维码!");
+        }
+        this.util.req("auth/share", this.scaninfo)
+            .then((data) => {
+                console.log(data);
+                this.success =data.success;
+                this.msg = data.msg;
+            })
     }
 
 }

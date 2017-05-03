@@ -1,8 +1,8 @@
 import {NgModule}           from '@angular/core';
-import {SafePipe}       from './safe.pipe';
+import {SafeUrlPipe,SafeCssPipe,SafeHtmlPipe,SafeJsPipe,SafeRsPipe}       from './safe.pipe';
 @NgModule({
-    declarations: [SafePipe],
-    exports:[SafePipe]
+    declarations: [SafeUrlPipe,SafeCssPipe,SafeHtmlPipe,SafeJsPipe,SafeRsPipe],
+    exports:[SafeUrlPipe,SafeCssPipe,SafeHtmlPipe,SafeJsPipe,SafeRsPipe]
 })
 export class SafeModule {
     static forRoot() {

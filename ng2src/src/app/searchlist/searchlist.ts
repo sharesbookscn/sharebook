@@ -12,11 +12,11 @@ import { PipeModule } from '../../pipe';
 declare var $: JQueryStatic;
 
 @Component({
-    selector: 'book-list',
-    template: '' + require('./booklist.html')
+    selector: 'search-list',
+    template: '' + require('./searchlst.html')
 })
 
-export class BookListComponent {
+export class SearchListComponent {
     private booklist = [];
     private success: boolean;
     private msg: string;
@@ -41,10 +41,10 @@ export class BookListComponent {
 
 @NgModule({
     imports: [CommonModule, MaterialModule, FormsModule, ChartModule, PipeModule],
-    declarations: [BookListComponent],
-    exports: [BookListComponent],
+    declarations: [SearchListComponent],
+    exports: [SearchListComponent],
     providers: [AppService],
 })
-export class BookListModule {
+export class SearchListModule {
 }
 

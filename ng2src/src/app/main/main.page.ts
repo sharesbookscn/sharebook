@@ -8,6 +8,7 @@ import { AppService } from '../app.service'
 import { TrendingListModule}   from '../trendinglist/trendinglist';
 import { AccountInfoModule}   from '../accountinfo/accountinfo';
 import { BookListModule}   from '../booklist/booklist';
+import { SearchListModule}   from '../searchlist/searchlist';
 import { BookInModule}   from '../bookin/bookin';
 
 

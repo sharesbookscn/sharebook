@@ -1,13 +1,9 @@
-<md-card class="book" *ngFor="let book of booklist">
+<md-card class="searchbook" *ngFor="let book of booklist">
     <div>
-        <img [src]="book.img|safers">
+        <img [src]="book.image|safeurl">
     </div>
     <div class="info">
-        <span style="font-size: larger">{{book.title}}</span>
-        <span class="smaller">拥有者 <span >{{book.userid}}</span></span>
-        <br>
-        <span>租借时间
-            <font color="blue">53天</font>
-        </span>
+        <span>{{book.title}}</span>
+        <span>{{book.summary}}</span>
     </div>
 </md-card>

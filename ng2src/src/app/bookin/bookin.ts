@@ -25,6 +25,7 @@ export class BookInComponent {
     result: any = {};
     private msg:string;
     private success:boolean;
+    private testISBNs=['9787544270878','9787544285148','9787532773800','9787544272162','9787544279598','9787544275224']
     constructor(private util: AppService
         , private router: Router
         , private renderer: Renderer
@@ -49,7 +50,10 @@ export class BookInComponent {
         request.send();
     }
     testBarcode() {
-        this.getBookInfo('9787543632608');
+        this.getBookInfo(this.randomTestISBN());
+    }
+    randomTestISBN(){
+        return this.testISBNs[Math.floor(Math.random() * this.testISBNs.length) ];
     }
     getImgUrl() {
         return this.scaninfo.images ? this.scaninfo.images.large : './assets/img/app.png';
@@ -63,7 +67,7 @@ export class BookInComponent {
                 console.log(result);
                 if(result.text==='test'){
                     //测试时使用
-                    result.text='9787543632608';
+                    result.text=this.randomTestISBN();
                 }
                 this.ngZone.run(() => {
                     this.getBookInfo(result.text);

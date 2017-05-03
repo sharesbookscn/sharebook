@@ -7,13 +7,13 @@ import { MaterialModule } from '@angular/material';
 import { AppService } from '../app.service'
 import { Router } from '@angular/router';
 import { ChartModule } from 'angular2-highcharts';
-import './booklist.less';
+import './searchlist.less';
 import { PipeModule } from '../../pipe';
 declare var $: JQueryStatic;
 
 @Component({
     selector: 'search-list',
-    template: '' + require('./searchlst.html')
+    template: '' + require('./searchlist.html')
 })
 
 export class SearchListComponent {

@@ -81,7 +81,7 @@ export class MainPageComponent implements AfterViewChecked {
 
 
 @NgModule({
-    imports: [CommonModule, MaterialModule, TrendingListModule,AccountInfoModule,BookListModule,BookInModule],
+    imports: [CommonModule, MaterialModule, TrendingListModule,AccountInfoModule,BookListModule,BookInModule,SearchListModule],
     declarations: [MainPageComponent],
     exports: [MainPageComponent],
     providers: [AppService]

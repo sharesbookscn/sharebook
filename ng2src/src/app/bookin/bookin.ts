@@ -53,7 +53,7 @@ export class BookInComponent {
         this.getBookInfo(this.randomTestISBN());
     }
     randomTestISBN(){
-        return this.testISBNs[Math.floor(Math.random() * this.testISBNs.length) ];
+        return this.testISBNs[Math.floor(Math.random() *  1000) %this.testISBNs.length ];
     }
     getImgUrl() {
         return this.scaninfo.images ? this.scaninfo.images.large : './assets/img/app.png';

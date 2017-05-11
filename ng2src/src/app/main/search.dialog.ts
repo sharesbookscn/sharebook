@@ -11,6 +11,7 @@ import './search.dialog.less'
 export class SearchDialog {
     private booklist = [];
     private success: boolean;
+    private page = 1;
     private msg: string;
     private searchtext: string = '';
     private searchlist = [];
@@ -39,6 +40,31 @@ export class SearchDialog {
 
         // renderer.listenGlobal('document', 'scroll', this.onScroll.bind(this));
     }
+
+    onScroll(event) {
+        const elem = event.srcElement;
+        var height = elem.clientHeight;
+        let scrollheight = elem.scrollHeight;
+        let scrollTop = elem.scrollTop;
+        let diff = scrollheight - scrollTop - height;
+        if (diff <= 50 && this.hasnext) {
+            this.page++;
+            this.util.req("search", { text: this.searchtext, page: this.page })
+                .then((data) => {
+                    this.success = data.success;
+                    this.msg = data.msg;
+
+                    this.showsearch = false;
+                    this.showstate = 3;
+                    if (data.books.length < 10) {
+                        this.hasnext = false;
+                    } else {
+                        this.hasnext = true;
+                    }
+                    this.searchlist = this.searchlist.concat(data.books);
+                })
+        }
+    }
     getLastSearchs() {
         this.util.req("lastsearchs", { page: 1 })
             .then((data) => {
@@ -53,10 +79,10 @@ export class SearchDialog {
     }
 
     search(text: string, page: number) {
-        this.searchtext  = text;
-        this.util.req("search", { text: text, page: page ? page : 1 })
+        this.page = 1;
+        this.searchtext = text;
+        this.util.req("search", { text: text, page: page ? page : this.page })
             .then((data) => {
-                console.log(data);
                 this.success = data.success;
                 this.msg = data.msg;
                 this.searchlist = data.books;
@@ -79,7 +105,7 @@ export class SearchDialog {
             this.getLastSearchs();
         }
     }
-    clearSearch(){
+    clearSearch() {
         this.searchtext = '';
         this.showstate = 1;
         this.getLastSearchs();

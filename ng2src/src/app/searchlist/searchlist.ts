@@ -19,6 +19,8 @@ declare var $: JQueryStatic;
 export class SearchListComponent {
     private booklist = [];
     private success: boolean;
+    private hasnext: boolean = true;
+    private page: number = 1;
     private msg: string;
     constructor(private util: AppService
         , private router: Router
@@ -34,10 +36,25 @@ export class SearchListComponent {
         // renderer.listenGlobal('document', 'scroll', this.onScroll.bind(this));
     }
 
+    onScroll(event) {
+        const elem = event.srcElement;
+        var height = elem.clientHeight;
+        let scrollheight = elem.scrollHeight;
+        let scrollTop = elem.scrollTop;
+        let diff = scrollheight - scrollTop - height;
+        if (diff <= 50 && this.hasnext) {
+            this.page++;
+            this.util.req("booklist", { page: this.page })
+                .then((data) => {
+                    if (!data.books || data.books.length < 10) {
+                        this.hasnext = false;
+                    }
+                    this.booklist = this.booklist.concat(data.books);
+                })
+        }
+    }
 
 }
-
-
 
 @NgModule({
     imports: [CommonModule, MaterialModule, FormsModule, ChartModule, PipeModule],

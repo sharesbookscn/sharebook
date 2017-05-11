@@ -13,6 +13,7 @@ export class SearchDialog {
     private success: boolean;
     private page = 1;
     private msg: string;
+    private querying = false;
     private searchtext: string = '';
     private searchlist = [];
     private popularsearchs = [];
@@ -47,8 +48,9 @@ export class SearchDialog {
         let scrollheight = elem.scrollHeight;
         let scrollTop = elem.scrollTop;
         let diff = scrollheight - scrollTop - height;
-        if (diff <= 50 && this.hasnext) {
+        if (diff <= 50 && this.hasnext && !this.querying) {
             this.page++;
+            this.querying = true;
             this.util.req("search", { text: this.searchtext, page: this.page })
                 .then((data) => {
                     this.success = data.success;
@@ -61,6 +63,7 @@ export class SearchDialog {
                     } else {
                         this.hasnext = true;
                     }
+                    this.querying = false;
                     this.searchlist = this.searchlist.concat(data.books);
                 })
         }
@@ -81,8 +84,10 @@ export class SearchDialog {
     search(text: string, page: number) {
         this.page = 1;
         this.searchtext = text;
+        this.querying = true;
         this.util.req("search", { text: text, page: page ? page : this.page })
             .then((data) => {
+                this.querying = false;
                 this.success = data.success;
                 this.msg = data.msg;
                 this.searchlist = data.books;

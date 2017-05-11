@@ -22,6 +22,7 @@ export class SearchListComponent {
     private hasnext: boolean = true;
     private page: number = 1;
     private msg: string;
+    private querying = false;
     constructor(private util: AppService
         , private router: Router
         , private renderer: Renderer
@@ -42,10 +43,12 @@ export class SearchListComponent {
         let scrollheight = elem.scrollHeight;
         let scrollTop = elem.scrollTop;
         let diff = scrollheight - scrollTop - height;
-        if (diff <= 50 && this.hasnext) {
+        if (diff <= 50 && this.hasnext && ! this.querying) {
             this.page++;
+            this.querying = true;
             this.util.req("booklist", { page: this.page })
                 .then((data) => {
+                    this.querying = false;
                     if (!data.books || data.books.length < 10) {
                         this.hasnext = false;
                     }

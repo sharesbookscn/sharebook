@@ -18,7 +18,7 @@ export class AppService {
     private mqttclient: any;
     err: any;
     errmsg: string;
-    deviceId = (window['device'] && window['device'].uuid)? window['device'].uuid : this.guid();
+    deviceId = (window['device'] && window['device'].uuid) ? window['device'].uuid : this.guid();
     constructor(private jsonp: Jsonp, private router: Router) {
         this.initMqtt();
     }
@@ -32,40 +32,51 @@ export class AppService {
         });
         //订阅clientid
         this.mqttclient.subscribe(this.mqttclient.options.clientId);
-        this.mqttclient.on("message", (topic, payload)=>{
-            Object.keys(this.messageListeners).forEach((key)=>{
-                var val = this.messageListeners[key];
-                val(topic, payload);
+        this.mqttclient.on("message", (topic, payload) => {
+            Object.keys(this.messageListeners).forEach((key) => {
+                const uuid = JSON.parse(payload.toString()).uuid;
+                console.log("topic===",topic);
+                console.log("payload===",JSON.parse(payload.toString()));
+                console.log("key===",key);
+                if(key===uuid){
+                    var val = this.messageListeners[key];
+                    val(topic, payload);
+
+                }
             });
             // this.messageListeners.forEach((func) => func(topic, payload));
         });
-        this.mqttclient.on("connect", (connack)=> {
-            const msg = {deviceid: this.deviceId };
-            this.req("regdevice",msg);
+        this.mqttclient.on("connect", (connack) => {
+            const msg = { deviceid: this.deviceId };
+            this.req("regdevice", msg);
         });
-    } 
+    }
     public guid() {
-        function s4() {
-            return Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1);
-        }
-        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-            s4() + '-' + s4() + s4() + s4();
+        return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' +
+            this.s4() + '-' + this.s4() + this.s4() + this.s4();
+    }
+    s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
     }
     /**
      * 
      * @param param 
      * @param callback  必须是promise
      */
-    public req(type:string , param: any): any {
+    public req(type: string, param: any): any {
         return new Promise((resolve, reject) => {
             try {
                 const uuid = this.guid();
+                console.log(uuid);
+                console.log("type===",type);
                 this.messageListeneruuids.push(uuid);
                 const data = { type: type, uuid: uuid, param: param };
                 //callback必须是promise
-                let func = (topic, payload) => {
+                // let func = 
+                this.messageListeners[uuid] = (topic, payload) => {
+                    console.log("uuid===",uuid);
                     //从列表中移除uuid
                     for (var i = this.messageListeneruuids.length - 1; i > -1; i--) {
                         if (this.messageListeneruuids[i] === uuid) {
@@ -76,8 +87,7 @@ export class AppService {
                     delete this.messageListeners[uuid];
                     //返回结果
                     resolve(JSON.parse(payload.toString()).data);
-                }
-                this.messageListeners[uuid] = func;
+                };
                 this.mqttclient.publish("server", JSON.stringify(data));
             } catch (ex) {
                 reject(ex);

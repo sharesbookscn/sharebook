@@ -1,0 +1,57 @@
+<div class="searchlistcontainer">
+    <md-toolbar class="search-title">
+        <span ><i class="fa fa-search"></i></span>
+        <input placeholder="书名、作者" [(ngModel)]="searchtext" (keyup)="focusInput()" (focus)="focusInput()">
+        <span (click)="clearSearch()"><i class="fa fa-close"></i></span>
+        
+    </md-toolbar>
+    <div *ngIf="showstate==2" class="searchs">
+        <div >
+            <i class="fa fa-search"></i>
+            <span (click)="search(searchtext)">{{searchtext}}</span>
+            <i class="fa fa-close"></i>
+        </div>
+    </div>
+    <div *ngIf="showstate == 1">
+        <div   class="searchs">
+            <span class="historytext">搜索记录</span>
+            <div *ngFor="let item of lastsearchs" >
+                <i class="fa fa-search"></i>
+                <span (click)="search(item.text)">{{item.text}}</span>
+                <i class="fa fa-close"></i>
+            </div>
+        </div>
+        <div class="popularsearch">
+            <span class="historytext">大家都在搜</span>
+            <div>
+                <md-card  *ngFor="let book of popularsearchs">
+                    <div>
+                        <img [src]="book.image|safeurl"/>
+                        <span>{{book.title}}</span>
+                    </div> 
+                </md-card>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="showstate==3" class='searchresult'>
+        <md-card  *ngIf="!searchlist || searchlist.length==0 ">
+            <div>没找到"{{searchtext}}"!</div>
+        </md-card>
+         <md-card class="searchlist" *ngFor="let book of searchlist">
+            <div>
+                <img [src]="book.image|safeurl"/>
+            </div>
+            <div class="info">
+                <div>{{book.title}}</div>
+                <div>{{book.summary}}</div>
+                <div>{{book.author[0]}}</div>
+            </div>
+        </md-card>
+        <md-card  *ngIf="hasnext">
+            <div>正在加载中...</div>
+        </md-card>
+    </div>
+    <md-toolbar class="closetoolbar">
+        <a md-mini-fab (click)="close()"><i class="fa fa-close"></i></a>
+    </md-toolbar>
+</div>

@@ -1,150 +1,162 @@
 .app-title {
-  background-color: #eff3f2;
-  height: 48px;
-  flex: 0 0 48px;
-  border-bottom: 1px solid #e1e4e3;
-  font-size: 20px;
-  font-weight: bold;
-  font-family: "Microsoft YaHei UI";
+    background-color: #eff3f2;
+    height: 48px;
+    flex: 0 0 48px;
+    border-bottom: 1px solid #e1e4e3;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Microsoft YaHei UI";
+    justify-content: space-between;
+    >div.mat-toolbar-layout {
+        >md-toolbar-row {
+            justify-content: space-between;
+            >span.search {
+                flex: 0 0 0;
+                i.fa {
+                    color: #696969;
+                    font-size: 18px;
+                    cursor:pointer;
+                }
+            }
+        }
+    }
 }
+
 main-page {
-  md-tab-group.maintab {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    > .mat-tab-header {
-      flex: 0 0 60px;
-      order: 2;
-      display: flex;
-      flex-direction: row;
-      border-top: 1px solid #e1e4e3;
-      background-color: #eff3f2;
-      > .mat-tab-label-container >.mat-tab-list   {
-        > md-ink-bar{
-          display: none;
+    md-tab-group.maintab {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        >.mat-tab-header {
+            flex: 0 0 60px;
+            order: 2;
+            display: flex;
+            flex-direction: row;
+            border-top: 1px solid #e1e4e3;
+            background-color: #eff3f2;
+            >.mat-tab-label-container>.mat-tab-list {
+                >md-ink-bar {
+                    display: none;
+                }
+                >.mat-tab-labels {
+                    >.mat-tab-label {
+                        min-width: 40px;
+                        height: 58px;
+                        padding: 5px 0 0 0;
+                        flex: 1;
+                        font-weight: 500;
+                        font-size: 14px;
+                        line-height: 24px;
+                        text-align: center;
+                        font-family: "Microsoft YaHei UI";
+                        >md-ripple-background {
+                            display: none;
+                        }
+                        &.mat-tab-label-active {
+                            color: #029efd;
+                            &>i.fa {
+                                color: #029efd;
+                                -webkit-text-stroke: 1.0px #029efd;
+                            }
+                        }
+                        &>i.fa {
+                            font-size: 28px;
+                            display: block;
+                            color: rgba(0, 0, 0, 0);
+                            -webkit-text-stroke: 1.0px #000;
+                        }
+                    }
+                }
+            }
         }
-        >.mat-tab-labels {
-          > .mat-tab-label {
-            min-width: 40px;
-            height: 58px;
-            padding: 5px 0 0 0;
+        >.mat-tab-body-wrapper {
+            >md-tab-body {
+                width: 100%;
+                overflow: hidden;
+                &.mat-tab-body-active {
+                    overflow: hidden;
+                }
+            }
+        }
+        >.mat-tab-body-wrapper {
             flex: 1;
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 24px;
-            text-align: center;
-            font-family: "Microsoft YaHei UI";
-            > md-ripple-background {
-              display: none;
-            }
-            &.mat-tab-label-active {
-              color: #029efd;
-              & > i.fa {
-                color: #029efd;
-                -webkit-text-stroke: 1.0px #029efd;
-              }
-            }
-            & > i.fa {
-              font-size: 28px;
-              display: block;
-              color: rgba(0, 0, 0, 0);
-              -webkit-text-stroke: 1.0px #000;
-            }
-          }
+            order: 1;
+            >.mat-tab-body {}
         }
-      }
     }
-    > .mat-tab-body-wrapper {
-      > md-tab-body  {
+    md-tab-group.subtab {
         width: 100%;
+        height: 100%;
         overflow: hidden;
-        &.mat-tab-body-active{
-          overflow: hidden;
-        }
-      }
-    }
-    > .mat-tab-body-wrapper {
-      flex: 1;
-      order: 1;
-      > .mat-tab-body {
-      }
-    }
-  }
-
-  md-tab-group.subtab {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    > .mat-tab-header {
-      flex: 0 0 50px;
-      display: flex;
-      flex-direction: row;
-      > .mat-tab-label-container >.mat-tab-list {
-        display:flex;
-        flex-direction: row;
-        >.mat-tab-labels {
-          > .mat-tab-label {
-            flex: 1;
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 40px;
-            text-align: center;
-            min-width: 80px;
-            padding: 5px 0px;
-            text-align: center;
-            font-family: "Microsoft YaHei UI";
-            &.mat-tab-label-active {
-              color: #029efd;
-              border-bottom: 2px solid #ff4081;
+        display: flex;
+        flex-direction: column;
+        >.mat-tab-header {
+            flex: 0 0 50px;
+            display: flex;
+            flex-direction: row;
+            >.mat-tab-label-container>.mat-tab-list {
+                display: flex;
+                flex-direction: row;
+                >.mat-tab-labels {
+                    >.mat-tab-label {
+                        flex: 1;
+                        font-weight: 500;
+                        font-size: 14px;
+                        line-height: 40px;
+                        text-align: center;
+                        min-width: 80px;
+                        padding: 5px 0px;
+                        text-align: center;
+                        font-family: "Microsoft YaHei UI";
+                        &.mat-tab-label-active {
+                            color: #029efd;
+                            border-bottom: 2px solid #ff4081;
+                        }
+                    }
+                }
             }
-          }
         }
-      }
     }
-  }
-  .tabnew {
-    position: absolute;
-    width: 21px;
-    height: 9px;
-    background-color: #f00;
-    color: #fff;
-    top: 3px;
-    right: 25px;
-    font-size: 8px;
-    font-weight: 400;
-    line-height: 9px;
-    border-radius: 5px;
-    &::before{
-      content: ' ';
-      display: inline-block;
-      position: absolute;
-      left: 5px;
-      width: 0;
-      height: 0;
-      bottom: -4px;
-      border-style: solid;
-      border-color: #f00 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
-      border-width: 5px 5px 0 2px;
+    .tabnew {
+        position: absolute;
+        width: 21px;
+        height: 9px;
+        background-color: #f00;
+        color: #fff;
+        top: 3px;
+        right: 25px;
+        font-size: 8px;
+        font-weight: 400;
+        line-height: 9px;
+        border-radius: 5px;
+        &::before {
+            content: ' ';
+            display: inline-block;
+            position: absolute;
+            left: 5px;
+            width: 0;
+            height: 0;
+            bottom: -4px;
+            border-style: solid;
+            border-color: #f00 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+            border-width: 5px 5px 0 2px;
+        }
     }
-  }
-  .mat-tab-label{
-    position: relative;
-  }
-  .mat-tab-body-content{
-    width:100%;
-    height:100%;
-    box-sizing: content-box;
-  }
-  md-ink-bar{
-    display: none;
-  }
-  .mat-tab-header{
-    border-bottom: none;
-  }
-  div.mat-tab-header-pagination.mat-tab-header-pagination-disabled{
-    display: none;
-  }
-
+    .mat-tab-label {
+        position: relative;
+    }
+    .mat-tab-body-content {
+        width: 100%;
+        height: 100%;
+        box-sizing: content-box;
+    }
+    md-ink-bar {
+        display: none;
+    }
+    .mat-tab-header {
+        border-bottom: none;
+    }
+    div.mat-tab-header-pagination.mat-tab-header-pagination-disabled {
+        display: none;
+    }
 }

@@ -1,6 +1,12 @@
-<div style="display: flex; flex-direction: column;background-color: white;width:100%;height:100%;">
+<md-sidenav-container style="width:100%;height:100%;overflow:hidden;" >
+  <md-sidenav #sidenav align="end" style="width:100%">
+    <search-dialog (navToggle)="sidenav.toggle()"></search-dialog>
+  </md-sidenav>
+
+ <div style="display: flex; flex-direction: column;background-color: white;width:100%;height:100%;">
     <md-toolbar class="app-title">
         <span>分享</span>
+        <span class='search' ><i class="fa fa-search" (click)="sidenav.open()"></i></span>
     </md-toolbar>
     <md-tab-group class="maintab">
         <md-tab>
@@ -23,7 +29,7 @@
             <ng-template md-tab-label>
                 <i class="fa fa-search"></i>搜索
             </ng-template>
-            <div>
+            <div style="height: 100%;overflow-y:auto;">
                 <search-list style="height: 100%;display: flex;flex-flow: row  wrap;"></search-list>
             </div>
         </md-tab>
@@ -60,3 +66,5 @@
         </md-tab>
     </md-tab-group>
 </div>
+
+</md-sidenav-container>

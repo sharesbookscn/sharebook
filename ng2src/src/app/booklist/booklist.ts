@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 import { ChartModule } from 'angular2-highcharts';
 import './booklist.less';
 import { PipeModule } from '../../pipe';
-declare var $: JQueryStatic;
 
 @Component({
     selector: 'book-list',
@@ -24,13 +23,13 @@ export class BookListComponent {
         , private router: Router
         , private renderer: Renderer
         , private elem: ElementRef) {
-        this.util.req("booklist", { page: 1 })
-            .then((data) => {
-                console.log(data);
-                this.success = data.success;
-                this.msg = data.msg;
-                this.booklist = data.booklist;
-            })
+        // this.util.req("booklist", { page: 1 })
+        //     .then((data) => {
+        //         console.log(data);
+        //         this.success = data.success;
+        //         this.msg = data.msg;
+        //         this.booklist = data.booklist;
+        //     })
         // renderer.listenGlobal('document', 'scroll', this.onScroll.bind(this));
     }
 

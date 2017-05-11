@@ -1,0 +1,64 @@
+md-card.bookinfo {
+  padding-bottom: 0;
+  flex: 0 0 350px;
+  display: flex;
+  flex-direction: row;
+  >div:first-child{
+    flex: 0 0 200px;
+    height:300px;
+    line-height: 300px;
+    color:blue;
+    //border-radius: 50px;
+    //border:1px solid #ededed;
+    text-align: center;
+    margin:0 auto;
+    >img{
+      max-width:200px;
+      max-height:300px;
+    }
+    >span{
+      font-size:9px;
+      position: absolute;
+      width:100px;
+      bottom:-10px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      left:calc(~" 50% - 50px");
+    }
+  }
+  >div.info{
+    flex:1;
+    padding-left:10px;
+    dl {
+      width:100%;
+      padding-top:10px;
+    }
+    dt , dd{
+      height: 30px;
+      line-height: 30px;
+      display: block;
+    }
+    dt{
+      // width:80px;
+      vertical-align: middle;
+    }
+    dd{
+      // width: calc(~"100% - 80px");
+    }
+    dd.summary{
+      min-height:30px;
+      height:90px;
+      line-height:30px;
+      overflow: hidden;
+    }
+  }
+}
+md-card.selecttype{
+  padding-top:5px;
+  margin-top:5px;
+  text-align: center;
+  line-height: 50px;
+  flex:1;
+  margin-bottom:10px;
+}

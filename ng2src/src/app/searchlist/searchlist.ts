@@ -24,13 +24,13 @@ export class SearchListComponent {
         , private router: Router
         , private renderer: Renderer
         , private elem: ElementRef) {
-        // this.util.req("booklist", { page: 1 })
-        //     .then((data) => {
-        //         console.log(data);
-        //         this.success = data.success;
-        //         this.msg = data.msg;
-        //         this.booklist = data.books;
-        //     })
+        this.util.req("booklist", { page: 1 })
+            .then((data) => {
+                console.log(data);
+                this.success = data.success;
+                this.msg = data.msg;
+                this.booklist = data.books;
+            })
         // renderer.listenGlobal('document', 'scroll', this.onScroll.bind(this));
     }
 

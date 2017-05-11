@@ -56,17 +56,24 @@ search-dialog {
     }
     .searchs {
         &>div {
-            display: block;
+            display: flex;
             line-height: 40px;
             padding: 5px 20px;
             border-bottom: 1px solid lightgray;
             &>* {
+                flex: 0 0 auto;
                 font-size: 15px;
                 color: #696969;
+                height:40px;
                 line-height: 40px;
                 &.fa:last-child {
                     float: right;
                 }
+            }
+            &>span{
+                flex:1;
+                height:40px;
+                padding:0 20px;
             }
         }
         &>span.historytext {

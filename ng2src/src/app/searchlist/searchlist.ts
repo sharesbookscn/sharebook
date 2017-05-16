@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild, ElementRef, AfterViewInit, AfterViewChecked, Renderer, Pipe } from '@angular/core';
-import { NgModule } from '@angular/core';
+import { NgModule, Output, EventEmitter } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { ChartModule } from 'angular2-highcharts';
 import './searchlist.less';
 import { PipeModule } from '../../pipe';
+import { BookDetailModule } from '../bookdetail/bookdetail';
+
 declare var $: JQueryStatic;
 
 @Component({
@@ -23,6 +25,7 @@ export class SearchListComponent {
     private page: number = 1;
     private msg: string;
     private querying = false;
+    @Output() bookToggle = new EventEmitter<any>();
     constructor(private util: AppService
         , private router: Router
         , private renderer: Renderer
@@ -56,11 +59,18 @@ export class SearchListComponent {
                 })
         }
     }
+    // openbook(book){
+    //     this.currentbook = book;
+    //     this.sidenav.toggle();
+    // }
+     openbook(book){
+        this.bookToggle.emit(book);
+    }
 
 }
 
 @NgModule({
-    imports: [CommonModule, MaterialModule, FormsModule, ChartModule, PipeModule],
+    imports: [CommonModule, MaterialModule, FormsModule, ChartModule, PipeModule,BookDetailModule],
     declarations: [SearchListComponent],
     exports: [SearchListComponent],
     providers: [AppService],

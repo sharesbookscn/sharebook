@@ -1,5 +1,5 @@
-import { Component, AfterViewChecked, Renderer, ElementRef,  } from '@angular/core';
-import { NgModule } from '@angular/core';
+import { Component, AfterViewChecked, Renderer, ElementRef, } from '@angular/core';
+import { NgModule, ViewChild } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { CommonModule } from '@angular/common';
@@ -13,6 +13,7 @@ import { SearchListModule } from '../searchlist/searchlist';
 import { BookInModule } from '../bookin/bookin';
 import { SearchDialog } from './search.dialog';
 import { PipeModule } from '../../pipe';
+import { BookDetailModule } from '../bookdetail/bookdetail';
 
 @Component({
     selector: 'main-page',
@@ -23,6 +24,8 @@ export class MainPageComponent implements AfterViewChecked {
     private topTabIndex: number = 0;
     private subTabIndex = { 0: 0 };
     private showed: boolean = false;
+    private currentbook: any;
+    @ViewChild('booknav') booknav;
     constructor(private util: AppService
         , private renderer: Renderer
         , private elementRef: ElementRef
@@ -85,17 +88,23 @@ export class MainPageComponent implements AfterViewChecked {
         });
     }
 
+    openBook(book) {
+        console.log(book);
+        this.currentbook = book;
+        this.booknav.toggle();
+    }
+
 }
 
 
 
 @NgModule({
     imports: [CommonModule, MaterialModule, TrendingListModule, AccountInfoModule,
-        BookListModule, BookInModule, SearchListModule, PipeModule,FormsModule],
+        BookListModule, BookInModule, SearchListModule, PipeModule, FormsModule ,BookDetailModule],
     declarations: [MainPageComponent, SearchDialog],
     exports: [MainPageComponent, SearchDialog],
     providers: [AppService],
-    entryComponents: [ SearchDialog, ]
+    entryComponents: [SearchDialog,]
 
 
 })

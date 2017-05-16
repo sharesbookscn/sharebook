@@ -31,7 +31,7 @@ export class BookListComponent {
                 this.msg = data.msg;
                 this.booklist = data.booklist;
             })
-        renderer.listenGlobal('document', 'scroll', this.onScroll.bind(this));
+        // renderer.listenGlobal('document', 'scroll', this.onScroll.bind(this));
     }
 
 

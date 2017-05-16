@@ -1,24 +1,28 @@
-<md-card class="bookinfo">
+ <md-toolbar class="search-title">
+    借书
+</md-toolbar>
+<md-card class="bookdetail">
     <div>
-        <img src="{{getImgUrl()}}" />
+        <div>
+            <img src="{{getImgUrl()}}" />
+        </div>
+        <div class="detailinfo">
+            <div>{{getUrl('title')}}</div>
+            <div>{{getUrl('author')}}</div>
+            <div>拥有者:  {{getUrl('userid')}}</div>
+            <div>数量:  {{getNum()}}</div>
+        </div>
     </div>
-    <div class="info">
-        <dl>
-            <dt>书名</dt>
-            <dd>{{getUrl('title')}}</dd>
-            <dt>出版社</dt>
-            <dd>{{getUrl('publisher')}}</dd>
-            <dt>出版时间</dt>
-            <dd>{{getUrl('pubdate')}}</dd>
-            <dt>简介</dt>
-            <dd class='summary'>{{getSummary()}}</dd>
-        </dl>
+    <div class="summary">
+        <div>{{getSummary()}}</div>
     </div>
 </md-card>
 
-<md-card class="selecttype">
-    <!--<button md-raised-button style="background-color:saddlebrown;color: white;" (click)="scan()">扫描</button><br>-->
-    <button md-raised-button style="background-color:green;color: white;"  (click)="share()">分享</button>
-    <!--<button md-raised-button style="background-color:green;color: white;" (click)="testBarcode()">获取图书信息</button>-->
-    <span [style]="('display:block;color:'+(success==true?'green':'red'))|safecss"  *ngIf="msg">{{msg}}</span>
+<md-card>
+    <button md-raised-button style="background-color:green;color: white;"  (click)="borrow()">借书</button>
+    <button md-raised-button style="background-color:green;color: white;"  (click)="focus()">关注</button>
 </md-card>
+
+ <md-toolbar class="closetoolbar">
+    <a md-mini-fab (click)="close()"><i class="fa fa-close"></i></a>
+</md-toolbar>

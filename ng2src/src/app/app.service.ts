@@ -3,29 +3,33 @@ import { Jsonp } from '@angular/http'
 import { Config } from './conf/conf'
 import 'rxjs/add/operator/toPromise';
 import { Router } from '@angular/router';
+
 class User {
     public userid: string;
     public username: string;
     public menu: Array<any>;
 }
-import { connect, Client, Store } from 'mqtt';
-@Injectable(
-
-)
+import * as mqtt from 'mqtt';
+@Injectable()
 export class AppService {
     user: User = { userid: null, username: null, menu: null };
     logined = false;
     private mqttclient: any;
     err: any;
     errmsg: string;
-    deviceId = (window['device'] && window['device'].uuid) ? window['device'].uuid : this.guid();
+    deviceId :string;
     constructor(private jsonp: Jsonp, private router: Router) {
-        this.initMqtt();
+        //  console.log(connect,Client,Store);
+        //  mqtt =window['mqtt'];
+        // console.log(mqtt,process);
+         this.initMqtt();
+        
     }
     private messageListeners = {};
     private messageListeneruuids = [];
-    private initMqtt() {
-        this.mqttclient = connect(Config.server);
+    public initMqtt() {
+        this.deviceId = (window['device'] && window['device'].uuid) ? window['device'].uuid : this.guid();
+        this.mqttclient = mqtt.connect(Config.server);
         this.mqttclient.on("error", (err) => {
             this.err = err;
             this.errmsg = "服务器连接失败!请重试!";

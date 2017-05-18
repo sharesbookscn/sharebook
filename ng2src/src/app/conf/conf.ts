@@ -1,5 +1,4 @@
 var ret;
-
 var env = "dev";
 var dev = {
     server: 'http://localhost:3002',

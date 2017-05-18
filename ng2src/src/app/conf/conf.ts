@@ -1,5 +1,5 @@
 var ret;
-var env = "dev";
+var env = "prod";
 var dev = {
     server: 'http://localhost:3002',
     mqttserver: 'mqtt://localhost:3002'

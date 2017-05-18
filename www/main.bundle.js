@@ -66485,7 +66485,7 @@ exports.BookInModule = BookInModule;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var ret;
-var env = "dev";
+var env = "prod";
 var dev = {
     server: 'http://localhost:3002',
     mqttserver: 'mqtt://localhost:3002'

@@ -150,11 +150,6 @@ module.exports = function(env) {
                 //   unused: false
                 // }, // debug
                 // comments: true, //debug
-
-                mangle: {
-                    // Skip mangling these
-                    except: ['process']
-                },
                 beautify: false, //prod
                 output: {
                     comments: false
@@ -280,7 +275,7 @@ module.exports = function(env) {
         node: {
             global: true,
             crypto: 'empty',
-            process: false,
+            process: 'mock',
             module: false,
             clearImmediate: false,
             setImmediate: false

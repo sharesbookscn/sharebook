@@ -12,7 +12,7 @@ export { RegisterPageComponent}   from './register.page';
 
 
 @NgModule({
-    imports: [FormsModule, CommonModule, MaterialModule.forRoot(), HttpModule, JsonpModule],
+    imports: [FormsModule, CommonModule, MaterialModule, HttpModule, JsonpModule],
     declarations: [RegisterPageComponent],
     exports: [RegisterPageComponent],
     providers: [AppService, MdSnackBar],

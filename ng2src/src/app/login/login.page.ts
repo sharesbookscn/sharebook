@@ -88,7 +88,7 @@ export class LoginPageComponent {
 }
 
 @NgModule({
-    imports: [FormsModule, CommonModule, MaterialModule.forRoot(), HttpModule, JsonpModule],
+    imports: [FormsModule, CommonModule, MaterialModule, HttpModule, JsonpModule],
     providers: [AppService, MdSnackBar],
     declarations: [LoginPageComponent],
     exports: [LoginPageComponent]

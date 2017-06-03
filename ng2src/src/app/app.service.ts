@@ -3,7 +3,7 @@ import { Jsonp } from '@angular/http'
 import { Config } from './conf/conf'
 import 'rxjs/add/operator/toPromise';
 import { Router } from '@angular/router';
-
+import {  MdDialog} from '@angular/material';
 class User {
     public userid: string;
     public username: string;
@@ -17,13 +17,16 @@ export class AppService {
     private mqttclient: any;
     err: any;
     errmsg: string;
-    deviceId :string;
-    constructor(private jsonp: Jsonp, private router: Router) {
+    deviceId: string;
+    constructor(private jsonp: Jsonp, private router: Router
+        , private dialog:MdDialog
+
+    ) {
         //  console.log(connect,Client,Store);
         //  mqtt =window['mqtt'];
         // console.log(mqtt,process);
-         this.initMqtt();
-        
+        this.initMqtt();
+
     }
     private messageListeners = {};
     private messageListeneruuids = [];
@@ -39,10 +42,10 @@ export class AppService {
         this.mqttclient.on("message", (topic, payload) => {
             Object.keys(this.messageListeners).forEach((key) => {
                 const uuid = JSON.parse(payload.toString()).uuid;
-                console.log("topic===",topic);
-                console.log("payload===",JSON.parse(payload.toString()));
-                console.log("key===",key);
-                if(key===uuid){
+                console.log("topic===", topic);
+                console.log("payload===", JSON.parse(payload.toString()));
+                console.log("key===", key);
+                if (key === uuid) {
                     var val = this.messageListeners[key];
                     val(topic, payload);
 
@@ -74,13 +77,13 @@ export class AppService {
             try {
                 const uuid = this.guid();
                 console.log(uuid);
-                console.log("type===",type);
+                console.log("type===", type);
                 this.messageListeneruuids.push(uuid);
                 const data = { type: type, uuid: uuid, param: param };
                 //callback必须是promise
                 // let func = 
                 this.messageListeners[uuid] = (topic, payload) => {
-                    console.log("uuid===",uuid);
+                    console.log("uuid===", uuid);
                     //从列表中移除uuid
                     for (var i = this.messageListeneruuids.length - 1; i > -1; i--) {
                         if (this.messageListeneruuids[i] === uuid) {
@@ -96,6 +99,13 @@ export class AppService {
             } catch (ex) {
                 reject(ex);
             }
+        }).then((ret: any) => {
+            // console.log("ret===",ret);
+            if (!!ret && ret.code == 401) {
+                this.dialog.closeAll();
+                this.router.navigate(['/login']);
+            }
+            return ret;
         });
 
     }

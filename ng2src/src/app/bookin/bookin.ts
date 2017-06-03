@@ -4,10 +4,10 @@ import {
 } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Http, HttpModule, RequestOptions, Request, RequestMethod, Headers } from '@angular/http';
-import { MaterialModule } from '@angular/material';
+import { MaterialModule, MdDialog, MdDialogRef, MdNativeDateModule, } from '@angular/material';
 import { AppService } from '../app.service'
 import { Router } from '@angular/router';
 import { ChartModule } from 'angular2-highcharts';
@@ -26,10 +26,16 @@ export class BookInComponent {
     private msg: string;
     private success: boolean;
     private testISBNs = ['9787544270878', '9787544285148', '9787532773800', '9787544272162', '9787544279598', '9787544275224']
+    dialogdata: any;
+
     constructor(private util: AppService
         , private router: Router
         , private renderer: Renderer
-        , private elem: ElementRef, private http: Http, private ngZone: NgZone) {
+        , private elem: ElementRef
+        , private http: Http
+        , private ngZone: NgZone
+        , public dialog: MdDialog
+    ) {
 
         // renderer.listenGlobal('document', 'scroll', this.onScroll.bind(this));
     }
@@ -62,7 +68,7 @@ export class BookInComponent {
         return this.scaninfo[type] || ' ';
     }
     getSummary() {
-        return (this.scaninfo["summary"] || ' ').replace(/[\n,=]/ig,"");
+        return (this.scaninfo["summary"] || ' ').replace(/[\n,=]/ig, "");
     }
     scan() {
         return new Promise((resolve, reject) => {
@@ -100,25 +106,83 @@ export class BookInComponent {
             if (!this.scaninfo) {
                 alert("请扫描书籍二维码!");
             }
-            this.util.req("auth/share", this.scaninfo)
-                .then((data) => {
-                    console.log(data);
-                    this.success = data.success;
-                    this.msg = data.msg;
-                })
+            //扫描完成后弹出设置页面
+            let dialogRef = this.dialog.open(ShareInfoDialog, { width: "100%", height: "100%" });
+            this.scaninfo.num = 1;
+            this.scaninfo.sharedays = "一年"; 
+            dialogRef.componentInstance.book = this.scaninfo;
+            dialogRef.afterClosed().subscribe(result => {
+                this.dialogdata = result;
+
+            });
+
         });
 
     }
 
 }
 
+@Component({
+    selector: 'shareinfodialog',
+    templateUrl: 'shareinfo.html',
+})
+export class ShareInfoDialog {
+    book: any;
+    num = 1;
+    begindate = new Date();
+    enddate = new Date();
+    success: boolean;
+    msg: string;
+    constructor(
+        public dialogRef: MdDialogRef<ShareInfoDialog>
+        , private util: AppService
+    ) {
+    }
+    close() {
+        this.dialogRef.close();
+    }
+    getImgUrl() {
+        if (!this.book) {
+            return " ";
+        }
+        return this.book.images ? this.book.images.large : './assets/img/app.png';
+    }
+    getUrl(type) {
+        if (!this.book) {
+            return " ";
+        }
+        return this.book[type] || ' ';
+    }
+    getNum() {
+        if (!this.book) {
+            return 0;
+        }
+        return this.book['num'] || 1;
+    }
+    getSummary() {
+        if (!this.book) {
+            return " ";
+        }
+        return (this.book["summary"] || ' ').replace(/[\n,=]/ig, "");
+    }
+    share() {
+        
+        this.util.req("auth/share", this.book)
+            .then((data) => {
+                console.log(data);
+                this.success = data.success;
+                this.msg = data.msg;
+            })
+    }
+}
 
 
 @NgModule({
-    imports: [CommonModule, MaterialModule, FormsModule, ChartModule, PipeModule],
-    declarations: [BookInComponent],
+    imports: [CommonModule, MaterialModule, FormsModule, ChartModule, PipeModule, MdNativeDateModule, ReactiveFormsModule],
+    declarations: [BookInComponent, ShareInfoDialog],
     exports: [BookInComponent],
     providers: [AppService],
+    entryComponents: [ShareInfoDialog]
 })
 export class BookInModule {
 }

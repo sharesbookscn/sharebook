@@ -1,0 +1,40 @@
+ <md-toolbar class="title">
+    分享 {{dialogRef.data|json}} 
+</md-toolbar>
+<md-card class="shareinfo">
+    <div>
+        <div>
+            <img src="{{getImgUrl()}}" />
+        </div>
+        <div class="detailinfo">
+            <dl>
+                <dt>书名</dt>
+                <dd>{{getUrl('title')}}</dd>
+                <dt>出版社</dt>
+                <dd>{{getUrl('publisher')}}</dd>
+                <dt>出版时间</dt>
+                <dd>{{getUrl('pubdate')}}</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="summary">
+        <md-input-container>
+            <input mdInput [ngModel]="book?.num" (ngModelChange)="book.num=$event"  placeholder="数量">
+        </md-input-container>
+        <md-select placeholder="分享时间" [ngModel]="book?.sharedays" (ngModelChange)="book.sharedays=$event" >
+            <md-option value="一年">一年</md-option>
+            <md-option value="半年">半年</md-option>
+            <md-option value="两年">两年</md-option>
+            <md-option value="不限时间">不限时间</md-option>
+        </md-select>
+    </div>
+    <md-datepicker #begindatepicker></md-datepicker>
+    <md-datepicker #enddatepicker></md-datepicker>
+</md-card>
+<md-card style="text-align:center;padding:20px;">
+    <span>{{msg}}</span>
+</md-card>
+<md-card style="text-align:center;padding:20px;">
+    <button md-raised-button style="background-color:green;color: white;"  (click)="share()">分享</button>
+    <button md-raised-button style="background-color:green;color: white;"  (click)="close()">取消</button>
+</md-card>

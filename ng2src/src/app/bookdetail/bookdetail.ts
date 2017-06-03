@@ -57,7 +57,7 @@ export class BookDetailComponent implements OnChanges {
         if(!this.book){
             return 0;
         }
-        return this.book['num'] || 0;
+        return this.book['num'] || 1;
     }
     getSummary() {
         if(!this.book){

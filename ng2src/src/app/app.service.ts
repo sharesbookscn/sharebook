@@ -102,6 +102,7 @@ export class AppService {
         }).then((ret: any) => {
             // console.log("ret===",ret);
             if (!!ret && ret.code == 401) {
+                alert("您尚未登录,请在登录后进行分享");
                 this.dialog.closeAll();
                 this.router.navigate(['/login']);
             }

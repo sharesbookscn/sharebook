@@ -166,12 +166,15 @@ export class ShareInfoDialog {
         return (this.book["summary"] || ' ').replace(/[\n,=]/ig, "");
     }
     share() {
-        
         this.util.req("auth/share", this.book)
             .then((data) => {
                 console.log(data);
                 this.success = data.success;
                 this.msg = data.msg;
+                if(this.success){
+                    alert(this.msg);
+                    this.close();
+                }
             })
     }
 }

@@ -5,12 +5,14 @@
     <table class="datatable realtable" id="datatable" name="datatable" (click)="refresh()">
         <thead>
         <tr>
+            <th>名次</th>
             <th>用户</th>
-            <th>累计</th>
+            <th>积分</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let book of top100">
+        <tr *ngFor="let book of top100;let i = index;">
+            <td>{{index+1}}</td>
             <td>{{book._id}}</td>
             <td>{{book.sharepoint?book.sharepoint:0}}分</td>
         </tr>

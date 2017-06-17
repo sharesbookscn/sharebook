@@ -73,7 +73,7 @@ export class BookDetailComponent implements OnChanges {
     }
 
     borrow(){
-        this.util.req("borrow", this.book)
+        this.util.req("auth/borrow", this.book)
                 .then((data) => {
                     this.success = data.success;
                     this.msg = data.msg;
@@ -84,7 +84,7 @@ export class BookDetailComponent implements OnChanges {
     }
 
     focus(){
-        this.util.req("focus", this.book)
+        this.util.req("auth/focus", this.book)
                 .then((data) => {
                     this.success = data.success;
                     this.msg = data.msg;

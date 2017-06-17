@@ -1,18 +1,17 @@
 <md-toolbar class="title">
-    关注
+    我的关注
 </md-toolbar>
 <div class='searchresult'  (scroll)="onScroll($event)">
     <md-card  *ngIf="!searchlist || searchlist.length==0 ">
-        <div (click)="refresh()">尚未进行过分享!点击刷新</div>
+        <div (click)="refresh()">尚未进行过关注! 点击刷新</div>
     </md-card>
     <md-card class="searchlist" *ngFor="let book of searchlist">
         <div>
-            <img [src]="book.image|safeurl"/>
+            <img [src]="book.book[0].image|safeurl"/>
         </div>
         <div class="info">
-            <div>{{book.title}}</div>
-            <div>{{book.summary}}</div>
-            <div>{{book.author[0]}}</div>
+            <div>书名 : {{book.book[0].title}}</div>
+            <div>关注时间 : {{book.focustime|date:'y-MM-dd H:mm:ss'}}</div>
         </div>
     </md-card>
     <md-card  *ngIf="hasnext">

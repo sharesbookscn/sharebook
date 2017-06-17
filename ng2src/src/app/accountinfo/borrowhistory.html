@@ -7,12 +7,11 @@
     </md-card>
     <md-card class="searchlist" *ngFor="let book of searchlist">
         <div>
-            <img [src]="book.image|safeurl"/>
+            <img [src]="book.book[0].image|safeurl"/>
         </div>
         <div class="info">
-            <div>{{book.title}}</div>
-            <div>{{book.summary}}</div>
-            <div>{{book.author[0]}}</div>
+            <div>书名 : {{book.book[0].title}}</div>
+            <div>租借日期 : {{book.borrowtime|date:'y-MM-dd H:mm:ss'}}</div>
         </div>
     </md-card>
     <md-card  *ngIf="hasnext">

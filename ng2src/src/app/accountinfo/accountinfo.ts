@@ -32,7 +32,7 @@ export class AccountInfoComponent {
         // renderer.listenGlobal('document', 'scroll', this.onScroll.bind(this));
     }
     gotologin() {
-        window.localStorage.setItem("password", "");
+        // window.localStorage.setItem("password", "");
         this.router.navigate(['/login']);
     }
     openShareHistory() {
@@ -216,7 +216,7 @@ export class FocusListDialog {
         if (diff <= 50 && this.hasnext && !this.querying) {
             this.page++;
             this.querying = true;
-            this.util.req("auth/sharelist", { page: this.page })
+            this.util.req("auth/focuslist", { page: this.page })
                 .then((data) => {
                     this.success = data.success;
                     this.msg = data.msg;
@@ -231,7 +231,7 @@ export class FocusListDialog {
         }
     }
     refresh() {
-        this.util.req("auth/sharelist", { page: 1 })
+        this.util.req("auth/focuslist", { page: 1 })
             .then((data) => {
                 console.log(data);
                 if (data.books.length < 10) {
@@ -305,7 +305,7 @@ export class BorrowHistoryDialog {
         if (diff <= 50 && this.hasnext && !this.querying) {
             this.page++;
             this.querying = true;
-            this.util.req("auth/sharelist", { page: this.page })
+            this.util.req("auth/borrowhistory", { page: this.page })
                 .then((data) => {
                     this.success = data.success;
                     this.msg = data.msg;
@@ -320,7 +320,7 @@ export class BorrowHistoryDialog {
         }
     }
     refresh() {
-        this.util.req("auth/sharelist", { page: 1 })
+        this.util.req("auth/borrowhistory", { page: 1 })
             .then((data) => {
                 console.log(data);
                 if (data.books.length < 10) {

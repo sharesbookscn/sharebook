@@ -10,10 +10,10 @@
             <img [src]="book.image|safeurl"/>
         </div>
         <div class="info">
-            <div>{{book.title}}</div>
-            <div>分享数量:{{book.num}}</div>
-            <div>分享时长:{{book.sharedays}}</div>
-            <div>日期 {{book.sharedate|date:'y-MM-dd'}}</div>
+            <div>书名 : {{book.title}}</div>
+            <div>分享数量 : {{book.num}}</div>
+            <div>分享时长 : {{book.sharedays}}</div>
+            <div>日期 : {{book.sharedate|date:'y-MM-dd H:mm:ss'}}</div>
         </div>
     </md-card>
     <md-card  *ngIf="hasnext">

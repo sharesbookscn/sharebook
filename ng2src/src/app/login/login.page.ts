@@ -63,9 +63,12 @@ export class LoginPageComponent {
         window.localStorage.setItem("userid",this.userid);
         this.util.req("login",{userid:this.userid,password:this.password})
         .then((data)=>{
-            console.log(data);
+            
+            console.log("logindata===",data);
             this.msg = data.msg;
-            if(data.success){
+            if(data && data.success){
+                this.util.user.userid = data.data._id;
+                this.util.user.username = data.data.name;
                 window.localStorage.setItem("password",this.password);
                 this.router.navigate(['/main']);
             }

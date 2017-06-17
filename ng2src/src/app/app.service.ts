@@ -3,7 +3,7 @@ import { Jsonp } from '@angular/http'
 import { Config } from './conf/conf'
 import 'rxjs/add/operator/toPromise';
 import { Router } from '@angular/router';
-import {  MdDialog} from '@angular/material';
+import {  MdDialog ,MdSnackBar} from '@angular/material';
 class User {
     public userid: string;
     public username: string;
@@ -20,7 +20,7 @@ export class AppService {
     deviceId: string;
     constructor(private jsonp: Jsonp, private router: Router
         , private dialog:MdDialog
-
+        , private snackBar: MdSnackBar
     ) {
         //  console.log(connect,Client,Store);
         //  mqtt =window['mqtt'];
@@ -42,9 +42,9 @@ export class AppService {
         this.mqttclient.on("message", (topic, payload) => {
             Object.keys(this.messageListeners).forEach((key) => {
                 const uuid = JSON.parse(payload.toString()).uuid;
-                console.log("topic===", topic);
-                console.log("payload===", JSON.parse(payload.toString()));
-                console.log("key===", key);
+                // console.log("topic===", topic);
+                // console.log("payload===", JSON.parse(payload.toString()));
+                // console.log("key===", key);
                 if (key === uuid) {
                     var val = this.messageListeners[key];
                     val(topic, payload);
@@ -76,14 +76,14 @@ export class AppService {
         return new Promise((resolve, reject) => {
             try {
                 const uuid = this.guid();
-                console.log(uuid);
-                console.log("type===", type);
+                // console.log(uuid);
+                // console.log("type===", type);
                 this.messageListeneruuids.push(uuid);
                 const data = { type: type, uuid: uuid, param: param };
                 //callback必须是promise
                 // let func = 
                 this.messageListeners[uuid] = (topic, payload) => {
-                    console.log("uuid===", uuid);
+                    // console.log("uuid===", uuid);
                     //从列表中移除uuid
                     for (var i = this.messageListeneruuids.length - 1; i > -1; i--) {
                         if (this.messageListeneruuids[i] === uuid) {
@@ -100,9 +100,11 @@ export class AppService {
                 reject(ex);
             }
         }).then((ret: any) => {
-            // console.log("ret===",ret);
+            //  console.log("ret===",ret);
             if (!!ret && ret.code == 401) {
-                alert("您尚未登录,请在登录后进行分享");
+                this.snackBar.open("您尚未登录,请在登录后进行分享", "关闭", {
+                        duration: 2000,
+                        });
                 this.dialog.closeAll();
                 this.router.navigate(['/login']);
             }
@@ -113,12 +115,8 @@ export class AppService {
     public listen(callback) {
 
     }
-    public checklogin(): boolean {
-        if (!this.logined) {
-            this.router.navigate(['/login']);
-            return false;
-        }
-        return true;
+    public checklogin() {
+        return this.req("auth/checklogin",null)
     }
 
     private requestNoAuth(url: any): any {
@@ -147,10 +145,11 @@ export class AppService {
         return this.requestNoAuth("/authapp/login/" + user.userid + "/" + user.pwd)
             .then((data: any) => {
                 var retdata = data;
+                console.log(retdata);
                 if (retdata.success === true) {
                     this.logined = true;
-                    this.user.userid = retdata.username;
-                    this.user.username = retdata.username;
+                    this.user.userid = retdata._id;
+                    this.user.username = retdata.name;
                     this.user.menu = retdata.menu;
                     for (var i = 0; i < this.user.menu.length; i++) {
                         var menu = this.user.menu[i];

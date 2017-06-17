@@ -7,7 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Http, HttpModule, RequestOptions, Request, RequestMethod, Headers } from '@angular/http';
-import { MaterialModule } from '@angular/material';
+import { MaterialModule ,MdSnackBar} from '@angular/material';
 import { AppService } from '../app.service'
 import { Router } from '@angular/router';
 import { ChartModule } from 'angular2-highcharts';
@@ -30,7 +30,9 @@ export class BookDetailComponent implements OnChanges {
     constructor(private util: AppService
         , private router: Router
         , private renderer: Renderer
-        , private elem: ElementRef, private http: Http, private ngZone: NgZone) {
+        , private elem: ElementRef, private http: Http, private ngZone: NgZone
+        , private snackBar: MdSnackBar
+        ) {
 
         // renderer.listenGlobal('document', 'scroll', this.onScroll.bind(this));
     }
@@ -75,7 +77,9 @@ export class BookDetailComponent implements OnChanges {
                 .then((data) => {
                     this.success = data.success;
                     this.msg = data.msg;
-                    alert(data.msg);
+                    this.snackBar.open(data.msg, "关闭", {
+                        duration: 2000,
+                        });
                 })
     }
 
@@ -84,7 +88,9 @@ export class BookDetailComponent implements OnChanges {
                 .then((data) => {
                     this.success = data.success;
                     this.msg = data.msg;
-                    alert(data.msg);
+                    this.snackBar.open(data.msg, "关闭", {
+                        duration: 2000,
+                        });
                 })
     }
 

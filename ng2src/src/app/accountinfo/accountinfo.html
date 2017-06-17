@@ -3,17 +3,21 @@
         <div class="headimg">
             <img src="./assets/img/app.png"/>
         </div>
+        
         <div class="info">
+            <div *ngIf="!util.user.userid">
+                <span style="font-size: larger"  (click)="gotologin()">尚未登录,点击登录</span>
+            </div>
             <div>
-            <span style="font-size: larger">{{name}}</span>
+            <span style="font-size: larger">{{util.user?.userid}}</span>
             <span style="float:right;"></span>
             </div>
             <div  style="margin-top:10px;">
             <span>信誉等级
-                <font color="blue">{{level}}级</font>
+                <font color="blue">{{util.user?.level}}级</font>
             </span>
             <span style="float:right;">分享等级
-                <font color="blue">{{sharelevel}}级</font>
+                <font color="blue">{{util.user?.sharelevel}}级</font>
             </span>
             </div>
         </div>
@@ -22,7 +26,7 @@
         <md-list class="sharelist" style="padding-top:0;">
             <md-list-item class=" {{show1?'active':''}}">
                 <i class="fa fa-cubes"></i>
-                <div class="right {{show1?'active':''}}" (click)="show1=!show1">租借历史</div>
+                <div class="right {{show1?'active':''}}" (click)="openShareHistory()">租借历史</div>
                 
             </md-list-item>
             <book-list *ngIf="show1"></book-list>
@@ -47,4 +51,7 @@
         </md-list>
     
     </md-card>
+    <div class="row">
+        <button md-raised-button class="logoutbutton" (click)="gotologin()">退出登录</button>
+    </div>
 </div>

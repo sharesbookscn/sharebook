@@ -1,7 +1,7 @@
 <div class="login-container">
-    <div class="logo">
-        <img src="assets/img/app.png"/>
-    </div>
+    <md-toolbar class="app-title">
+        <span>用户注册</span>
+    </md-toolbar>
     <div class="content">
         <div class="row">
             <span class="msg">{{msg}}</span>
@@ -38,6 +38,5 @@
         <button md-raised-button class="loginbutton" [ngClass]="{disabled : logining}" (click)="gotologin()">返回</button>
         </div>
         
-        <span class="copyright">Copyright©sharesbooks</span>
     </div>
 </div>

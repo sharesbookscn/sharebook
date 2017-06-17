@@ -32,7 +32,7 @@ export class SearchDialog {
         //     });
         this.util.req("popularsearch", { page: 1 })
             .then((data) => {
-                console.log("==popularsearch", data);
+                // console.log("==popularsearch", data);
                 this.success = data.success;
                 this.msg = data.msg;
                 this.popularsearchs = data.books;
@@ -71,7 +71,7 @@ export class SearchDialog {
     getLastSearchs() {
         this.util.req("lastsearchs", { page: 1 })
             .then((data) => {
-                console.log("==lastsearchs", data);
+                // console.log("==lastsearchs", data);
                 this.success = data.success;
                 this.msg = data.msg;
                 this.lastsearchs = data.searchs;
@@ -101,7 +101,7 @@ export class SearchDialog {
             })
     }
     focusInput() {
-        console.log("...keypress...")
+        // console.log("...keypress...")
         if (this.searchtext) {
             this.showstate = 2;
             this.hasnext = true;

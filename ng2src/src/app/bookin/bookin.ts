@@ -7,7 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Http, HttpModule, RequestOptions, Request, RequestMethod, Headers } from '@angular/http';
-import { MaterialModule, MdDialog, MdDialogRef, MdNativeDateModule, } from '@angular/material';
+import { MaterialModule, MdDialog, MdDialogRef, MdNativeDateModule, MdSnackBar } from '@angular/material';
 import { AppService } from '../app.service'
 import { Router } from '@angular/router';
 import { ChartModule } from 'angular2-highcharts';
@@ -35,6 +35,8 @@ export class BookInComponent {
         , private http: Http
         , private ngZone: NgZone
         , public dialog: MdDialog
+        , private snackBar: MdSnackBar
+
     ) {
 
         // renderer.listenGlobal('document', 'scroll', this.onScroll.bind(this));
@@ -101,22 +103,29 @@ export class BookInComponent {
 
     }
     share() {
-        this.scan().then((bookinfo) => {
-            this.scaninfo = bookinfo;
-            if (!this.scaninfo) {
-                alert("请扫描书籍二维码!");
+        this.util.checklogin().then((data) => {
+            if (data && data.success) {
+                this.scan().then((bookinfo) => {
+                    this.scaninfo = bookinfo;
+                    if (!this.scaninfo) {
+                        // alert("请扫描书籍二维码!");
+                        this.snackBar.open("请扫描书籍二维码!", "关闭", {
+                            duration: 2000,
+                        });
+                    }
+                    //扫描完成后弹出设置页面
+                    let dialogRef = this.dialog.open(ShareInfoDialog, { width: "100%", height: "100%" });
+                    this.scaninfo.num = 1;
+                    this.scaninfo.sharedays = "一年";
+                    dialogRef.componentInstance.book = this.scaninfo;
+                    dialogRef.afterClosed().subscribe(result => {
+                        this.dialogdata = result;
+                    });
+
+                });
             }
-            //扫描完成后弹出设置页面
-            let dialogRef = this.dialog.open(ShareInfoDialog, { width: "100%", height: "100%" });
-            this.scaninfo.num = 1;
-            this.scaninfo.sharedays = "一年"; 
-            dialogRef.componentInstance.book = this.scaninfo;
-            dialogRef.afterClosed().subscribe(result => {
-                this.dialogdata = result;
+        })
 
-            });
-
-        });
 
     }
 
@@ -136,6 +145,7 @@ export class ShareInfoDialog {
     constructor(
         public dialogRef: MdDialogRef<ShareInfoDialog>
         , private util: AppService
+        , private snackBar: MdSnackBar
     ) {
     }
     close() {
@@ -171,8 +181,11 @@ export class ShareInfoDialog {
                 console.log(data);
                 this.success = data.success;
                 this.msg = data.msg;
-                if(this.success){
-                    alert(this.msg);
+                if (this.success) {
+                    // alert(this.msg);
+                    this.snackBar.open(this.msg, "关闭", {
+                        duration: 2000,
+                    });
                     this.close();
                 }
             })

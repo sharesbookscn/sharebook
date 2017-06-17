@@ -1,5 +1,5 @@
 <md-toolbar class="title">
-    分享历史
+    关注
 </md-toolbar>
 <div class='searchresult'  (scroll)="onScroll($event)">
     <md-card  *ngIf="!searchlist || searchlist.length==0 ">
@@ -11,9 +11,8 @@
         </div>
         <div class="info">
             <div>{{book.title}}</div>
-            <div>分享数量:{{book.num}}</div>
-            <div>分享时长:{{book.sharedays}}</div>
-            <div>日期 {{book.sharedate|date:'y-MM-dd'}}</div>
+            <div>{{book.summary}}</div>
+            <div>{{book.author[0]}}</div>
         </div>
     </md-card>
     <md-card  *ngIf="hasnext">

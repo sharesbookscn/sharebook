@@ -78,7 +78,7 @@ export class BookDetailComponent implements OnChanges {
                     this.success = data.success;
                     this.msg = data.msg;
                     this.snackBar.open(data.msg, "关闭", {
-                        duration: 2000,
+                        duration: 1000,
                         });
                 })
     }
@@ -89,7 +89,7 @@ export class BookDetailComponent implements OnChanges {
                     this.success = data.success;
                     this.msg = data.msg;
                     this.snackBar.open(data.msg, "关闭", {
-                        duration: 2000,
+                        duration: 1000,
                         });
                 })
     }

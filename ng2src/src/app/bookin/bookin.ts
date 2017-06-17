@@ -110,7 +110,7 @@ export class BookInComponent {
                     if (!this.scaninfo) {
                         // alert("请扫描书籍二维码!");
                         this.snackBar.open("请扫描书籍二维码!", "关闭", {
-                            duration: 2000,
+                            duration: 1000,
                         });
                     }
                     //扫描完成后弹出设置页面
@@ -184,7 +184,7 @@ export class ShareInfoDialog {
                 if (this.success) {
                     // alert(this.msg);
                     this.snackBar.open(this.msg, "关闭", {
-                        duration: 2000,
+                        duration: 1000,
                     });
                     this.close();
                 }

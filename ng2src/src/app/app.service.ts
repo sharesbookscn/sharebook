@@ -103,7 +103,7 @@ export class AppService {
             //  console.log("ret===",ret);
             if (!!ret && ret.code == 401) {
                 this.snackBar.open("您尚未登录,请在登录后进行分享", "关闭", {
-                        duration: 2000,
+                        duration: 1000,
                         });
                 this.dialog.closeAll();
                 this.router.navigate(['/login']);

@@ -24,30 +24,25 @@
     </md-card>
     <md-card style="overflow-y: auto;padding-top:0;margin-top:5px;">
         <md-list class="sharelist" style="padding-top:0;">
-            <md-list-item class=" {{show1?'active':''}}">
+            <md-list-item >
                 <i class="fa fa-cubes"></i>
-                <div class="right {{show1?'active':''}}" (click)="openShareHistory()">租借历史</div>
-                
+                <div class="right" (click)="openBorrowHistory()">租借历史</div>
             </md-list-item>
-            <book-list *ngIf="show1"></book-list>
-            <md-list-item class="{{show2?'active':''}}">
+
+            <md-list-item >
                 <i class="fa fa-cube"></i>
-                <div class="right " (click)="show2=!show2">分享历史</div>
-                
+                <div class="right "(click)="openShareHistory()">分享历史</div>
             </md-list-item>
-            <book-list *ngIf="show2"></book-list>
-            <md-list-item  class="{{show3?'active':''}}">
+
+            <md-list-item >
                 <i class="fa fa-list"></i>
-                <div class="right" (click)="show3=!show3">租借列表</div>
-                
+                <div class="right" (click)="openCurrentShare()">当前分享</div>
             </md-list-item>
-            <book-list *ngIf="show3"></book-list>
-            <md-list-item  class="{{show4?'active':''}}">
+
+            <md-list-item >
                 <i class="fa fa-podcast"></i>
-                <div class="right " (click)="show4=!show4">我的关注</div>
-                
+                <div class="right" (click)="openFocusList()">我的关注</div>
             </md-list-item>
-            <book-list *ngIf="show4" style="margin-top: 60px;"></book-list>
         </md-list>
     
     </md-card>

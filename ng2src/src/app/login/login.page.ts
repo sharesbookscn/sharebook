@@ -67,8 +67,7 @@ export class LoginPageComponent {
             console.log("logindata===",data);
             this.msg = data.msg;
             if(data && data.success){
-                this.util.user.userid = data.data._id;
-                this.util.user.username = data.data.name;
+                this.util.user = data.data;
                 window.localStorage.setItem("password",this.password);
                 this.router.navigate(['/main']);
             }

@@ -1,60 +1,18 @@
-<div style="display: flex; flex-direction: column;background-color: white;width:100%;height:100%;">
+<div style="display: flex; flex-direction: column;background-color: white;width:100%;height:100%;" >
     <div class="toolbar">
     
     </div>
-    <table class="datatable realtable" id="datatable" name="datatable">
+    <table class="datatable realtable" id="datatable" name="datatable" (click)="refresh()">
         <thead>
         <tr>
-            <th>月</th>
-            <th>年</th>
+            <th>用户</th>
             <th>累计</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>2月</td>
-            <td>2017年</td>
-            <td>300分</td>
-        </tr>
-        <tr>
-            <td>1月</td>
-            <td>2017年</td>
-            <td>200分</td>
-        </tr>
-        <tr>
-            <td>1月</td>
-            <td>2017年</td>
-            <td>100分</td>
-        </tr>
-        <tr>
-            <td>1月</td>
-            <td>2017年</td>
-            <td>100分</td>
-        </tr>
-        <tr>
-            <td>1月</td>
-            <td>2017年</td>
-            <td>100分</td>
-        </tr>
-        <tr>
-            <td>1月</td>
-            <td>2017年</td>
-            <td>100分</td>
-        </tr>
-        <tr>
-            <td>1月</td>
-            <td>2017年</td>
-            <td>100分</td>
-        </tr>
-        <tr>
-            <td>1月</td>
-            <td>2017年</td>
-            <td>100分</td>
-        </tr>
-        <tr>
-            <td>1月</td>
-            <td>2017年</td>
-            <td>100分</td>
+        <tr *ngFor="let book of top100">
+            <td>{{book._id}}</td>
+            <td>{{book.sharepoint?book.sharepoint:0}}分</td>
         </tr>
         </tbody>
     </table>
